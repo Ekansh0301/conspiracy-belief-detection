@@ -1,0 +1,383 @@
+{
+  "significance": {
+    "ours_vs_majority": {
+      "chi2": 4.363636363636363,
+      "p": 0.03671385636270408,
+      "b": 23,
+      "c": 10,
+      "significant": true
+    },
+    "ours_vs_tfidf_lr": {
+      "chi2": 2.45,
+      "p": 0.11752486809663953,
+      "b": 14,
+      "c": 6,
+      "significant": false
+    },
+    "permutation_ours_vs_tfidf": {
+      "observed_diff": 0.1346,
+      "p": 0.0196,
+      "significant": true
+    }
+  },
+  "calibration": {
+    "brier_score": 0.2168,
+    "ece": 0.1994,
+    "mce": 0.3796,
+    "reliability_diagram": {
+      "bin_accs": [
+        0,
+        0,
+        0,
+        0.08333333333333333,
+        0.08,
+        0.6,
+        0.5555555555555556,
+        1.0,
+        0,
+        0
+      ],
+      "bin_confs": [
+        0.05,
+        0.15000000000000002,
+        0.25,
+        0.35002340624729794,
+        0.4595731365680695,
+        0.54452130595843,
+        0.6338174343109131,
+        0.7024713754653931,
+        0.8500000000000001,
+        0.95
+      ],
+      "bin_counts": [
+        0,
+        0,
+        0,
+        12,
+        25,
+        30,
+        9,
+        1,
+        0,
+        0
+      ],
+      "bin_edges": [
+        0.0,
+        0.1,
+        0.2,
+        0.30000000000000004,
+        0.4,
+        0.5,
+        0.6000000000000001,
+        0.7000000000000001,
+        0.8,
+        0.9,
+        1.0
+      ]
+    }
+  },
+  "confidence": {
+    "Low (Q1)": {
+      "n": 19,
+      "accuracy": 0.8421,
+      "f1": 0.8403
+    },
+    "Med-Low (Q2)": {
+      "n": 19,
+      "accuracy": 0.8421,
+      "f1": 0.8348
+    },
+    "Med-High (Q3)": {
+      "n": 19,
+      "accuracy": 0.7895,
+      "f1": 0.7889
+    },
+    "High (Q4)": {
+      "n": 20,
+      "accuracy": 0.8,
+      "f1": 0.7333
+    },
+    "confidence_correctness_corr": {
+      "rho": -0.0144,
+      "p": 0.9011
+    }
+  },
+  "features": {
+    "conspiracy_indicators": [
+      {
+        "feature": "all",
+        "weight": 1.5811
+      },
+      {
+        "feature": "truth",
+        "weight": 1.5228
+      },
+      {
+        "feature": "there",
+        "weight": 1.4335
+      },
+      {
+        "feature": "trump",
+        "weight": 1.4247
+      },
+      {
+        "feature": "government",
+        "weight": 1.3984
+      },
+      {
+        "feature": "secret",
+        "weight": 1.3358
+      },
+      {
+        "feature": "dr",
+        "weight": 1.1847
+      },
+      {
+        "feature": "they",
+        "weight": 1.1825
+      },
+      {
+        "feature": "being",
+        "weight": 1.1624
+      },
+      {
+        "feature": "down",
+        "weight": 1.1183
+      },
+      {
+        "feature": "media",
+        "weight": 1.0796
+      },
+      {
+        "feature": "conspiracy",
+        "weight": 1.0679
+      },
+      {
+        "feature": "election",
+        "weight": 1.0365
+      },
+      {
+        "feature": "big",
+        "weight": 1.0196
+      },
+      {
+        "feature": "was",
+        "weight": 1.0125
+      },
+      {
+        "feature": "epstein",
+        "weight": 0.9943
+      },
+      {
+        "feature": "vaccine",
+        "weight": 0.9924
+      },
+      {
+        "feature": "is being",
+        "weight": 0.9799
+      },
+      {
+        "feature": "twitter",
+        "weight": 0.9755
+      },
+      {
+        "feature": "news",
+        "weight": 0.9149
+      }
+    ],
+    "non_conspiracy_indicators": [
+      {
+        "feature": "2021",
+        "weight": -1.3625
+      },
+      {
+        "feature": "while",
+        "weight": -1.1825
+      },
+      {
+        "feature": "my",
+        "weight": -1.1701
+      },
+      {
+        "feature": "more",
+        "weight": -1.1504
+      },
+      {
+        "feature": "two",
+        "weight": -1.1446
+      },
+      {
+        "feature": "discusses",
+        "weight": -1.1001
+      },
+      {
+        "feature": "week",
+        "weight": -1.0021
+      },
+      {
+        "feature": "law",
+        "weight": -0.9307
+      },
+      {
+        "feature": "development",
+        "weight": -0.8968
+      },
+      {
+        "feature": "when",
+        "weight": -0.8797
+      },
+      {
+        "feature": "of",
+        "weight": -0.8206
+      },
+      {
+        "feature": "enjoy",
+        "weight": -0.8102
+      },
+      {
+        "feature": "its",
+        "weight": -0.8075
+      },
+      {
+        "feature": "small",
+        "weight": -0.8008
+      },
+      {
+        "feature": "california",
+        "weight": -0.7949
+      },
+      {
+        "feature": "said",
+        "weight": -0.7822
+      },
+      {
+        "feature": "of my",
+        "weight": -0.77
+      },
+      {
+        "feature": "force",
+        "weight": -0.7571
+      },
+      {
+        "feature": "post",
+        "weight": -0.7536
+      },
+      {
+        "feature": "amendment",
+        "weight": -0.7513
+      }
+    ]
+  },
+  "subreddit_perf": {
+    "stupidpol": {
+      "n": 4,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "Christianity": {
+      "n": 4,
+      "accuracy": 0.25,
+      "errors": 3
+    },
+    "conspiracy": {
+      "n": 3,
+      "accuracy": 0.6667,
+      "errors": 1
+    },
+    "ProductViz": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "OccultConspiracy": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "WarCollege": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "Wallstreetsilver": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "Africa": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "wanttobelieve": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "LateStageCapitalism": {
+      "n": 2,
+      "accuracy": 0.5,
+      "errors": 1
+    },
+    "PrepperIntel": {
+      "n": 2,
+      "accuracy": 0.5,
+      "errors": 1
+    },
+    "Economics": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "JoeRogan": {
+      "n": 2,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "moderatepolitics": {
+      "n": 1,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "PedoGate": {
+      "n": 1,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "Unexplained_Mysteries": {
+      "n": 1,
+      "accuracy": 0.0,
+      "errors": 1
+    },
+    "Futurology": {
+      "n": 1,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "Superstonk": {
+      "n": 1,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "TruthLeaks": {
+      "n": 1,
+      "accuracy": 0.0,
+      "errors": 1
+    },
+    "Psychonaut": {
+      "n": 1,
+      "accuracy": 1.0,
+      "errors": 0
+    },
+    "conspiracy_themed_acc": 0.6,
+    "other_acc": 0.8333
+  },
+  "cant_tell": {
+    "n": 23,
+    "pred_yes": 11,
+    "pred_no": 12,
+    "mean_prob": 0.5262346008549565,
+    "std_prob": 0.07782251010646357,
+    "in_uncertain_zone": 18
+  }
+}

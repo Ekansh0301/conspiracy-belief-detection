@@ -1,0 +1,274 @@
+{
+  "A_ablation_best": {
+    "desc": "CV-best: single-phase + layerwise LR",
+    "macro_f1": 0.7879,
+    "precision": 0.7857,
+    "recall": 0.7904,
+    "accuracy": 0.8052,
+    "threshold": 0.37,
+    "temperature": 0.9996,
+    "confusion_matrix": [
+      [
+        42,
+        8
+      ],
+      [
+        7,
+        20
+      ]
+    ],
+    "train_time_sec": 147.7,
+    "config": {
+      "desc": "CV-best: single-phase + layerwise LR",
+      "epochs": 9,
+      "lr": 2e-05,
+      "dropout": 0.1,
+      "grad_accum": 2,
+      "patience": 4,
+      "label_smoothing": 0.05,
+      "weight_decay": 0.01,
+      "unfreeze_layers": 6,
+      "max_length": 256,
+      "canttell_as_yes": false,
+      "batch_size": 16
+    }
+  },
+  "B_combined_ablation": {
+    "desc": "Combined: single + uniform LR + CE",
+    "macro_f1": 0.7879,
+    "precision": 0.7857,
+    "recall": 0.7904,
+    "accuracy": 0.8052,
+    "threshold": 0.37,
+    "temperature": 0.9996,
+    "confusion_matrix": [
+      [
+        42,
+        8
+      ],
+      [
+        7,
+        20
+      ]
+    ],
+    "train_time_sec": 153.0,
+    "config": {
+      "desc": "Combined: single + uniform LR + CE",
+      "epochs": 9,
+      "lr": 2e-05,
+      "dropout": 0.1,
+      "grad_accum": 2,
+      "patience": 4,
+      "label_smoothing": 0.05,
+      "weight_decay": 0.01,
+      "unfreeze_layers": 6,
+      "max_length": 256,
+      "canttell_as_yes": false,
+      "batch_size": 16
+    }
+  },
+  "C_more_layers": {
+    "desc": "B + unfreeze 12 layers (captures layer 16 peak)",
+    "macro_f1": 0.7939,
+    "precision": 0.7882,
+    "recall": 0.8074,
+    "accuracy": 0.8052,
+    "threshold": 0.735,
+    "temperature": 0.9994,
+    "confusion_matrix": [
+      [
+        40,
+        10
+      ],
+      [
+        5,
+        22
+      ]
+    ],
+    "train_time_sec": 377.2,
+    "config": {
+      "desc": "B + unfreeze 12 layers (captures layer 16 peak)",
+      "epochs": 9,
+      "lr": 1.5e-05,
+      "dropout": 0.1,
+      "grad_accum": 2,
+      "patience": 4,
+      "label_smoothing": 0.05,
+      "weight_decay": 0.01,
+      "unfreeze_layers": 12,
+      "max_length": 256,
+      "canttell_as_yes": false,
+      "batch_size": 8
+    }
+  },
+  "D_high_smoothing": {
+    "desc": "B + label_smoothing=0.15 (from noise insight)",
+    "macro_f1": 0.7964,
+    "precision": 0.7917,
+    "recall": 0.8159,
+    "accuracy": 0.8052,
+    "threshold": 0.615,
+    "temperature": 0.9994,
+    "confusion_matrix": [
+      [
+        39,
+        11
+      ],
+      [
+        4,
+        23
+      ]
+    ],
+    "train_time_sec": 215.9,
+    "config": {
+      "desc": "B + label_smoothing=0.15 (from noise insight)",
+      "epochs": 9,
+      "lr": 2e-05,
+      "dropout": 0.1,
+      "grad_accum": 2,
+      "patience": 4,
+      "label_smoothing": 0.15,
+      "weight_decay": 0.01,
+      "unfreeze_layers": 6,
+      "max_length": 256,
+      "canttell_as_yes": false,
+      "batch_size": 16
+    }
+  },
+  "E_canttell_yes": {
+    "desc": "B + can't-tell as Yes (more data)",
+    "macro_f1": 0.7968,
+    "precision": 0.8031,
+    "recall": 0.7919,
+    "accuracy": 0.8182,
+    "threshold": 0.575,
+    "temperature": 0.9997,
+    "confusion_matrix": [
+      [
+        44,
+        6
+      ],
+      [
+        8,
+        19
+      ]
+    ],
+    "train_time_sec": 186.3,
+    "config": {
+      "desc": "B + can't-tell as Yes (more data)",
+      "epochs": 9,
+      "lr": 2e-05,
+      "dropout": 0.1,
+      "grad_accum": 2,
+      "patience": 4,
+      "label_smoothing": 0.05,
+      "weight_decay": 0.01,
+      "unfreeze_layers": 6,
+      "max_length": 256,
+      "canttell_as_yes": true,
+      "batch_size": 16
+    }
+  },
+  "F_short_length": {
+    "desc": "B + max_length=128 (focus on key signal)",
+    "macro_f1": 0.8004,
+    "precision": 0.8004,
+    "recall": 0.8004,
+    "accuracy": 0.8182,
+    "threshold": 0.575,
+    "temperature": 0.9994,
+    "confusion_matrix": [
+      [
+        43,
+        7
+      ],
+      [
+        7,
+        20
+      ]
+    ],
+    "train_time_sec": 75.7,
+    "config": {
+      "desc": "B + max_length=128 (focus on key signal)",
+      "epochs": 12,
+      "lr": 2e-05,
+      "dropout": 0.1,
+      "grad_accum": 2,
+      "patience": 4,
+      "label_smoothing": 0.05,
+      "weight_decay": 0.01,
+      "unfreeze_layers": 6,
+      "max_length": 128,
+      "canttell_as_yes": false,
+      "batch_size": 16
+    }
+  },
+  "G_kitchen_sink": {
+    "desc": "All insights: +layers, +smooth, +canttell, +dropout",
+    "macro_f1": 0.8064,
+    "precision": 0.8005,
+    "recall": 0.8174,
+    "accuracy": 0.8182,
+    "threshold": 0.685,
+    "temperature": 0.9997,
+    "confusion_matrix": [
+      [
+        41,
+        9
+      ],
+      [
+        5,
+        22
+      ]
+    ],
+    "train_time_sec": 384.6,
+    "config": {
+      "desc": "All insights: +layers, +smooth, +canttell, +dropout",
+      "epochs": 12,
+      "lr": 1.5e-05,
+      "dropout": 0.15,
+      "grad_accum": 2,
+      "patience": 5,
+      "label_smoothing": 0.1,
+      "weight_decay": 0.02,
+      "unfreeze_layers": 12,
+      "max_length": 256,
+      "canttell_as_yes": true,
+      "batch_size": 8
+    }
+  },
+  "H_conservative": {
+    "desc": "Safe: single-phase + smoothing=0.10 + canttell",
+    "macro_f1": 0.8094,
+    "precision": 0.8204,
+    "recall": 0.8019,
+    "accuracy": 0.8312,
+    "threshold": 0.595,
+    "temperature": 0.9998,
+    "confusion_matrix": [
+      [
+        45,
+        5
+      ],
+      [
+        8,
+        19
+      ]
+    ],
+    "train_time_sec": 176.5,
+    "config": {
+      "desc": "Safe: single-phase + smoothing=0.10 + canttell",
+      "epochs": 9,
+      "lr": 2e-05,
+      "dropout": 0.1,
+      "grad_accum": 2,
+      "patience": 4,
+      "label_smoothing": 0.1,
+      "weight_decay": 0.01,
+      "unfreeze_layers": 6,
+      "max_length": 256,
+      "canttell_as_yes": true,
+      "batch_size": 16
+    }
+  }
+}

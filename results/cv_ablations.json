@@ -1,0 +1,476 @@
+{
+  "full_system": {
+    "desc": "Full System",
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.7565,
+        "precision": 0.7573,
+        "recall": 0.7558,
+        "accuracy": 0.761,
+        "threshold": 0.47,
+        "train_size": 2824,
+        "val_size": 707,
+        "train_time_sec": 419.0,
+        "n_epochs": 9
+      },
+      "fold_1": {
+        "macro_f1": 0.69,
+        "precision": 0.6896,
+        "recall": 0.6921,
+        "accuracy": 0.6926,
+        "threshold": 0.46,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 428.8,
+        "n_epochs": 9
+      },
+      "fold_2": {
+        "macro_f1": 0.7256,
+        "precision": 0.727,
+        "recall": 0.7307,
+        "accuracy": 0.7266,
+        "threshold": 0.485,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 436.2,
+        "n_epochs": 9
+      },
+      "fold_3": {
+        "macro_f1": 0.7064,
+        "precision": 0.7111,
+        "recall": 0.7139,
+        "accuracy": 0.7068,
+        "threshold": 0.455,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 419.2,
+        "n_epochs": 9
+      },
+      "fold_4": {
+        "macro_f1": 0.7316,
+        "precision": 0.7312,
+        "recall": 0.7345,
+        "accuracy": 0.7337,
+        "threshold": 0.505,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 414.4,
+        "n_epochs": 9
+      }
+    },
+    "summary": {
+      "mean_f1": 0.722,
+      "std_f1": 0.0226,
+      "min_f1": 0.69,
+      "max_f1": 0.7565,
+      "mean_precision": 0.7232,
+      "std_precision": 0.0224,
+      "mean_recall": 0.7254,
+      "std_recall": 0.0213,
+      "mean_accuracy": 0.7241,
+      "std_accuracy": 0.0234,
+      "fold_f1s": [
+        0.7565,
+        0.69,
+        0.7256,
+        0.7064,
+        0.7316
+      ]
+    }
+  },
+  "no_focal": {
+    "desc": "- Focal Loss",
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.7405,
+        "precision": 0.7414,
+        "recall": 0.7399,
+        "accuracy": 0.7454,
+        "threshold": 0.435,
+        "train_size": 2824,
+        "val_size": 707,
+        "train_time_sec": 413.4,
+        "n_epochs": 9
+      },
+      "fold_1": {
+        "macro_f1": 0.6929,
+        "precision": 0.6925,
+        "recall": 0.6937,
+        "accuracy": 0.6969,
+        "threshold": 0.43,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 425.5,
+        "n_epochs": 9
+      },
+      "fold_2": {
+        "macro_f1": 0.7212,
+        "precision": 0.7222,
+        "recall": 0.7259,
+        "accuracy": 0.7224,
+        "threshold": 0.445,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 437.4,
+        "n_epochs": 9
+      },
+      "fold_3": {
+        "macro_f1": 0.7035,
+        "precision": 0.7028,
+        "recall": 0.7047,
+        "accuracy": 0.7068,
+        "threshold": 0.465,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 431.4,
+        "n_epochs": 9
+      },
+      "fold_4": {
+        "macro_f1": 0.7302,
+        "precision": 0.7296,
+        "recall": 0.7311,
+        "accuracy": 0.7337,
+        "threshold": 0.55,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 428.6,
+        "n_epochs": 9
+      }
+    },
+    "summary": {
+      "mean_f1": 0.7177,
+      "std_f1": 0.0174,
+      "min_f1": 0.6929,
+      "max_f1": 0.7405,
+      "mean_precision": 0.7177,
+      "std_precision": 0.0178,
+      "mean_recall": 0.7191,
+      "std_recall": 0.0172,
+      "mean_accuracy": 0.721,
+      "std_accuracy": 0.0176,
+      "fold_f1s": [
+        0.7405,
+        0.6929,
+        0.7212,
+        0.7035,
+        0.7302
+      ]
+    }
+  },
+  "no_two_phase": {
+    "desc": "- Two-Phase",
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.7654,
+        "precision": 0.7657,
+        "recall": 0.7699,
+        "accuracy": 0.7666,
+        "threshold": 0.365,
+        "train_size": 2824,
+        "val_size": 707,
+        "train_time_sec": 829.2,
+        "n_epochs": 9
+      },
+      "fold_1": {
+        "macro_f1": 0.7649,
+        "precision": 0.7654,
+        "recall": 0.7644,
+        "accuracy": 0.7691,
+        "threshold": 0.535,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 749.4,
+        "n_epochs": 8
+      },
+      "fold_2": {
+        "macro_f1": 0.7629,
+        "precision": 0.7624,
+        "recall": 0.7633,
+        "accuracy": 0.7663,
+        "threshold": 0.41,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 821.8,
+        "n_epochs": 9
+      },
+      "fold_3": {
+        "macro_f1": 0.7677,
+        "precision": 0.7683,
+        "recall": 0.7673,
+        "accuracy": 0.772,
+        "threshold": 0.46,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 636.1,
+        "n_epochs": 7
+      },
+      "fold_4": {
+        "macro_f1": 0.7671,
+        "precision": 0.7664,
+        "recall": 0.7699,
+        "accuracy": 0.7691,
+        "threshold": 0.385,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 636.8,
+        "n_epochs": 7
+      }
+    },
+    "summary": {
+      "mean_f1": 0.7656,
+      "std_f1": 0.0017,
+      "min_f1": 0.7629,
+      "max_f1": 0.7677,
+      "mean_precision": 0.7656,
+      "std_precision": 0.0019,
+      "mean_recall": 0.767,
+      "std_recall": 0.0027,
+      "mean_accuracy": 0.7686,
+      "std_accuracy": 0.0021,
+      "fold_f1s": [
+        0.7654,
+        0.7649,
+        0.7629,
+        0.7677,
+        0.7671
+      ]
+    }
+  },
+  "no_layerwise_lr": {
+    "desc": "- Layerwise LR",
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.7565,
+        "precision": 0.7558,
+        "recall": 0.7575,
+        "accuracy": 0.7595,
+        "threshold": 0.435,
+        "train_size": 2824,
+        "val_size": 707,
+        "train_time_sec": 418.0,
+        "n_epochs": 9
+      },
+      "fold_1": {
+        "macro_f1": 0.7165,
+        "precision": 0.7164,
+        "recall": 0.7165,
+        "accuracy": 0.721,
+        "threshold": 0.47,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 413.0,
+        "n_epochs": 9
+      },
+      "fold_2": {
+        "macro_f1": 0.7417,
+        "precision": 0.7454,
+        "recall": 0.749,
+        "accuracy": 0.7422,
+        "threshold": 0.47,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 412.9,
+        "n_epochs": 9
+      },
+      "fold_3": {
+        "macro_f1": 0.7321,
+        "precision": 0.7322,
+        "recall": 0.7359,
+        "accuracy": 0.7337,
+        "threshold": 0.48,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 412.7,
+        "n_epochs": 9
+      },
+      "fold_4": {
+        "macro_f1": 0.7475,
+        "precision": 0.7472,
+        "recall": 0.7508,
+        "accuracy": 0.7493,
+        "threshold": 0.49,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 412.9,
+        "n_epochs": 9
+      }
+    },
+    "summary": {
+      "mean_f1": 0.7389,
+      "std_f1": 0.0137,
+      "min_f1": 0.7165,
+      "max_f1": 0.7565,
+      "mean_precision": 0.7394,
+      "std_precision": 0.0138,
+      "mean_recall": 0.7419,
+      "std_recall": 0.0145,
+      "mean_accuracy": 0.7411,
+      "std_accuracy": 0.0132,
+      "fold_f1s": [
+        0.7565,
+        0.7165,
+        0.7417,
+        0.7321,
+        0.7475
+      ]
+    }
+  },
+  "frozen_only": {
+    "desc": "- Fine-Tuning",
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.6736,
+        "precision": 0.6737,
+        "recall": 0.6736,
+        "accuracy": 0.6789,
+        "threshold": 0.49,
+        "train_size": 2824,
+        "val_size": 707,
+        "train_time_sec": 199.9,
+        "n_epochs": 5
+      },
+      "fold_1": {
+        "macro_f1": 0.6298,
+        "precision": 0.6295,
+        "recall": 0.6304,
+        "accuracy": 0.6346,
+        "threshold": 0.48,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 200.0,
+        "n_epochs": 5
+      },
+      "fold_2": {
+        "macro_f1": 0.6761,
+        "precision": 0.6784,
+        "recall": 0.6813,
+        "accuracy": 0.6771,
+        "threshold": 0.47,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 199.9,
+        "n_epochs": 5
+      },
+      "fold_3": {
+        "macro_f1": 0.6594,
+        "precision": 0.6598,
+        "recall": 0.6623,
+        "accuracy": 0.6615,
+        "threshold": 0.485,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 199.8,
+        "n_epochs": 5
+      },
+      "fold_4": {
+        "macro_f1": 0.6723,
+        "precision": 0.6727,
+        "recall": 0.6754,
+        "accuracy": 0.6742,
+        "threshold": 0.47,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 199.9,
+        "n_epochs": 5
+      }
+    },
+    "summary": {
+      "mean_f1": 0.6623,
+      "std_f1": 0.0172,
+      "min_f1": 0.6298,
+      "max_f1": 0.6761,
+      "mean_precision": 0.6628,
+      "std_precision": 0.0178,
+      "mean_recall": 0.6646,
+      "std_recall": 0.0182,
+      "mean_accuracy": 0.6652,
+      "std_accuracy": 0.0165,
+      "fold_f1s": [
+        0.6736,
+        0.6298,
+        0.6761,
+        0.6594,
+        0.6723
+      ]
+    }
+  },
+  "cls_pooling": {
+    "desc": "- Mean Pool (CLS)",
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.7311,
+        "precision": 0.738,
+        "recall": 0.7287,
+        "accuracy": 0.7397,
+        "threshold": 0.45,
+        "train_size": 2824,
+        "val_size": 707,
+        "train_time_sec": 410.6,
+        "n_epochs": 9
+      },
+      "fold_1": {
+        "macro_f1": 0.6864,
+        "precision": 0.6859,
+        "recall": 0.6878,
+        "accuracy": 0.6898,
+        "threshold": 0.47,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 413.3,
+        "n_epochs": 9
+      },
+      "fold_2": {
+        "macro_f1": 0.7141,
+        "precision": 0.7135,
+        "recall": 0.7161,
+        "accuracy": 0.7167,
+        "threshold": 0.495,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 435.7,
+        "n_epochs": 9
+      },
+      "fold_3": {
+        "macro_f1": 0.7039,
+        "precision": 0.7063,
+        "recall": 0.7026,
+        "accuracy": 0.711,
+        "threshold": 0.51,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 392.3,
+        "n_epochs": 8
+      },
+      "fold_4": {
+        "macro_f1": 0.7208,
+        "precision": 0.7201,
+        "recall": 0.7224,
+        "accuracy": 0.7238,
+        "threshold": 0.49,
+        "train_size": 2825,
+        "val_size": 706,
+        "train_time_sec": 436.2,
+        "n_epochs": 9
+      }
+    },
+    "summary": {
+      "mean_f1": 0.7112,
+      "std_f1": 0.0152,
+      "min_f1": 0.6864,
+      "max_f1": 0.7311,
+      "mean_precision": 0.7128,
+      "std_precision": 0.0171,
+      "mean_recall": 0.7115,
+      "std_recall": 0.0147,
+      "mean_accuracy": 0.7162,
+      "std_accuracy": 0.0163,
+      "fold_f1s": [
+        0.7311,
+        0.6864,
+        0.7141,
+        0.7039,
+        0.7208
+      ]
+    }
+  }
+}

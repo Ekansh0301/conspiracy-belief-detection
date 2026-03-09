@@ -1,0 +1,13 @@
+{
+  "marker_masking": {
+    "mean_original": 0.7226,
+    "cls_original": 0.7511,
+    "mean_masked": 0.6698,
+    "cls_masked": 0.6642,
+    "pooling_gap_original": -0.0285,
+    "pooling_gap_masked": 0.0056,
+    "gap_reduction": -0.0341
+  },
+  "roberta_large_mean": 0.8258,
+  "deberta_base_mean": 0.727
+}

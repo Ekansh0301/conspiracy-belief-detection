@@ -1,0 +1,42 @@
+[
+  {
+    "id": "t1_fed52vz",
+    "text": "In a major 60 MINUTES investigation, Liam Bartlett reveals an added level of Weinstein wickedness. To cover up his many crimes, the one-time Hollywood heavyweight had at his disposal a so-called \u201carmy of spies\u201d. These \u201cagents\u201d collected sensitive and embarrassing information about his victims, which was then used to discredit or shut them up. Among Weinstein\u2019s trusted allies was Australian Dylan Howard, who a few days ago went to court to try to stop his part in Bartlett\u2019s story being broadcast.",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.5006576776504517,
+    "confidence": 0.0013153553009033203,
+    "is_error": true,
+    "error_type": "FN"
+  },
+  {
+    "id": "t1_dv50ne3",
+    "text": "It seems that more and more Germans are going back to their roots. They are moving out to the country and building and maintaining medieval-style villages, where they live healthy lives in a tight-knit community. In the process, they are depriving the current power structure of a money and control. Predictably, these peaceful people are being labeled as \"far-right extremists,\" and even \"Nazis.\"",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.4823560416698456,
+    "confidence": 0.03528791666030884,
+    "is_error": true,
+    "error_type": "FN"
+  },
+  {
+    "id": "t1_gxljbtn",
+    "text": "Thirty-five years ago, fighter pilot Oscar Santa Maria Huerta had a real-life Independence Day moment when he attempted to shoot down a mysterious light-bulb shaped craft, in what to this day remains the only documented case of a military aircraft firing on a UFO.",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.41410085558891296,
+    "confidence": 0.17179828882217407,
+    "is_error": true,
+    "error_type": "FN"
+  },
+  {
+    "id": "t1_grzklo5",
+    "text": "Mar 21, 2021 - KEY HIGHLIGHTS: \n \u2022\u2022The Migration Act allows families who aren't permanent residents to be deported if their children have a disability. \n \u2022\u2022Parents and advocates fear for the children's condition and wellbeing if they have to leave Australia. \n \u2022\u2022The Department of Home Affairs says the rules are pragmatic and balance compassion with cost containment...",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.3778865337371826,
+    "confidence": 0.24422693252563477,
+    "is_error": true,
+    "error_type": "FN"
+  }
+]

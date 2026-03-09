@@ -1,180 +1,177 @@
-# SemEval-2026 Task 10 — Subtask 2: Conspiracy Belief Detection
+# Conspiracy Belief Detection — SemEval-2026 Task 10, Subtask 2
 
-**Team:** Truth Gradient · Ekansh Goyal, IIIT Hyderabad  
-**Task:** [PsyCoMark — SemEval-2026 Task 10](https://sites.google.com/view/semeval2026-task10)  
-**Paper:** [`paper/latex/main.pdf`](paper/latex/main.pdf)
+> **Truth Gradient** · Ekansh Goyal · IIIT Hyderabad
 
-| Metric | Score |
+Official system submission for [PsyCoMark: SemEval-2026 Task 10](https://sites.google.com/view/semeval2026-task10), Subtask 2 — detecting whether a Reddit author *believes* a conspiracy theory or merely discusses it.
+
+📄 **Paper:** [Truth Gradient at SemEval-2026 Task 10: Mean Pooling and Narrative Density for Conspiracy Belief Detection](paper/latex/main.pdf)
+
+---
+
+## Results at a Glance
+
+| | |
 |---|---|
 | **Official Test Macro F1** | **0.750** |
-| Dev Macro F1 (τ = 0.595) | 0.829 |
-| Dev Precision / Recall / Accuracy | 0.829 / 0.829 / 0.844 |
-| Dev bootstrap 95% CI | [0.712, 0.893] |
-| 5-fold CV | 0.734 ± 0.007 |
+| Dev Macro F1 | 0.829 (P = R = 0.829, Acc = 0.844) |
+| Dev 95% Bootstrap CI | [0.712, 0.893] |
+| 5-Fold Cross-Validation | 0.734 ± 0.007 |
+| Decision Threshold | τ = 0.595 (dev-optimised) |
 
 ---
 
-## Task
+## Overview
 
-Binary classification: given a Reddit post, determine whether the author **believes** a conspiracy theory (`Yes`) or merely **discusses / reports** it (`No`). Metric: macro F1.
+### Task
 
----
+Binary classification over Reddit posts: does the author **believe** the conspiracy theory (`Yes`) or merely **discuss / report** it (`No`)? Evaluation metric is macro F1.
 
-## Key Finding: Narrative Density
+### Core Finding: Narrative Density
 
-Believers use significantly more psycholinguistic markers per post (6.53 ± 3.53) than non-believers (4.35 ± 4.29) — Cohen's *d* = 0.56, Mann-Whitney *p* < 10⁻⁸⁰, across all five marker categories (Actor, Action, Effect, Evidence, Victim). We call this **narrative density**: conspiracy believers construct structurally *more complete* conspiratorial frames, not just more topically relevant text.
+Conspiracy believers do not merely use more topically relevant words — they construct *structurally denser* conspiratorial frames. Believers average **6.53 ± 3.53** psycholinguistic markers per post versus **4.35 ± 4.29** for non-believers (Cohen's *d* = 0.56, Mann-Whitney *p* < 10⁻⁸⁰), consistently across all five marker categories:
 
-Two causal tests support this:
-
-| Test | Result |
+| Marker Category | Captures |
 |---|---|
-| Marker masking (replace spans → whitespace) | F1 drops .723 → .670 (−5.3 pp) |
-| Marker-count fusion (+6 normalized features) | F1 rises .670 → .679 (+0.9 pp) |
+| **Actor** | Who is behind it |
+| **Action** | What they are doing |
+| **Effect** | What harm results |
+| **Evidence** | What proof is cited |
+| **Victim** | Who is harmed |
 
-This motivates **sequence-level mean pooling** over the full post rather than a single `[CLS]` token.
+We call this pattern **narrative density**. Two causal tests validate it:
 
----
-
-## Architecture
-
-| Component | Choice |
+| Experiment | Finding |
 |---|---|
-| Encoder | `microsoft/deberta-v3-large` (434M params) |
-| Pooling | Mean pool over all non-padding tokens |
-| Classifier | Linear (hidden → 2) + label smoothing 0.10 |
-| Training | Frozen warmup → unfreeze top 6 layers; cosine LR |
-| Hyperparameters | lr = 2e-5, batch = 16 × 2 grad-accum, max_len = 256, epochs = 9, patience = 4 |
-| Ensemble | 5-seed probability averaging (seeds: 2026, 42, 1337, 7, 2024) |
-| Threshold | τ = 0.595 (dev-optimized) |
-| can't-tell | Ambiguous training labels remapped to `Yes` |
+| Mask all annotated marker spans | F1: .723 → .670 (−5.3 pp) |
+| Append 6 normalised marker-count features | F1: .670 → .679 (+0.9 pp) |
+
+Because the belief signal is *distributed* across the full post rather than concentrated at one position, **sequence-level mean pooling** outperforms single-token `[CLS]` representations.
 
 ---
 
-## Results
+## Model
 
-### Main Results (dev set, τ = 0.595)
+| Component | Details |
+|---|---|
+| **Encoder** | `microsoft/deberta-v3-large` (434 M params, 24 layers) |
+| **Pooling** | Mean pool over all non-padding token representations |
+| **Classifier** | Linear projection (hidden → 2 classes) |
+| **Label smoothing** | 0.10 |
+| **Training schedule** | Frozen warmup → unfreeze top 6 layers → cosine LR decay |
+| **Optimiser** | AdamW, lr = 2 × 10⁻⁵, batch = 16 × 2 grad-accum |
+| **Sequence length** | 256 tokens |
+| **Early stopping** | Patience = 4 epochs (max 9) |
+| **Ensemble** | Probability averaging over 5 seeds: {2026, 42, 1337, 7, 2024} |
+| **can't-tell handling** | Ambiguous training labels remapped to `Yes` |
+
+---
+
+## Experimental Results
+
+### Comparison with Baselines
 
 | System | F1 | P | R | Acc |
 |---|---|---|---|---|
 | Majority class | 0.394 | — | — | — |
-| TF-IDF + LR | 0.690 | 0.684 | 0.669 | 0.714 |
+| TF-IDF + Logistic Regression | 0.690 | 0.684 | 0.669 | 0.714 |
 | TF-IDF + SVM | 0.656 | 0.668 | 0.651 | 0.701 |
-| DeBERTa-v3-large, CLS | 0.776 | — | — | — |
+| DeBERTa-v3-large, CLS token | 0.776 | — | — | — |
 | DeBERTa-v3-large, single seed | 0.780 | — | — | — |
-| **DeBERTa-v3-large, mean pool, 5-seed** | **0.829** | **0.829** | **0.829** | **0.844** |
+| **DeBERTa-v3-large, mean pool, 5-seed (ours)** | **0.829** | **0.829** | **0.829** | **0.844** |
 
-**Official test F1: 0.750** (leaderboard rankings not yet public at time of writing).
+**Official test F1: 0.750.** Leaderboard rankings had not been published at the time of writing.
 
-### Ablation (5-fold CV)
+### Ablation (5-Fold CV)
 
-| Config | CV F1 | Δ |
+| Configuration | CV F1 | Δ |
 |---|---|---|
 | Full system | 0.734 | — |
-| − Encoder fine-tuning | 0.662 | **−0.072** |
+| − Encoder fine-tuning (all layers frozen) | 0.662 | **−0.072** |
 
-### Dev → Test Gap
+### Note on the Dev → Test Gap
 
-The 7.9-point gap (dev 0.829 → test 0.750) reflects compounding factors on the 77-sample dev set: wide bootstrap uncertainty (CI [0.712, 0.893]); τ and can't-tell remapping both selected on the same small set; ensemble averaging optimized to dev boundary cases. The CV estimate (0.734) was the more honest predictor — use CV-based model selection in low-resource shared tasks.
+The 7.9-point gap (dev 0.829 → test 0.750) is explained by three compounding factors:
+1. The 77-sample dev set produces wide uncertainty (bootstrap 95% CI: [0.712, 0.893]).
+2. Both the decision threshold (τ = 0.595) and the can't-tell remapping strategy were selected on the same 77 samples.
+3. The ensemble was implicitly tuned to dev boundary cases.
+
+The 5-fold CV estimate (0.734) was the more reliable predictor of test performance and was not used for selection — we recommend CV-based model selection as the standard for low-resource shared tasks.
 
 ---
 
-## Project Structure
+## Repository Structure
 
 ```
-subtask2/
-├── README.md
-├── requirements.txt
-├── .gitignore
-│
+.
 ├── code/
-│   ├── train_simple.py          # Simple DeBERTa + mean-pool trainer (original)
-│   ├── train_improved.py        # ★ Ensemble trainer used for submission
-│   ├── dual.py                  # Dual-head (CLS + mean pool) baseline model
-│   ├── run_experiments.py       # Baselines, single-seed ablations, k-fold
-│   ├── run_advanced.py          # Layer probing, subreddit analysis, noise robustness
-│   ├── run_kfold.py             # 5-fold cross-validation
-│   ├── run_cv_ablations.py      # CV ablation study
-│   ├── run_new_experiments.py   # Marker masking & pooling comparison
-│   ├── run_marker_fusion.py     # Marker-count feature fusion
-│   ├── run_supplementary.py     # Calibration, statistical significance
-│   ├── run_proper_pooling_cv.py # Pooling strategy head-to-head CV
-│   ├── run_analysis.py          # Post-hoc analysis pipeline
-│   └── generate_pub_figures.py  # ★ All paper figures (outputs to figures/)
+│   ├── train_improved.py        ← submitted ensemble trainer
+│   ├── train_simple.py          ← original single-seed trainer
+│   ├── dual.py                  ← CLS + mean-pool dual-head baseline
+│   ├── run_experiments.py       ← baselines, single-seed ablations, k-fold
+│   ├── run_advanced.py          ← layer probing, subreddit analysis, noise
+│   ├── run_kfold.py             ← 5-fold cross-validation
+│   ├── run_cv_ablations.py      ← CV ablation study
+│   ├── run_new_experiments.py   ← marker masking & pooling comparison
+│   ├── run_marker_fusion.py     ← marker-count feature fusion
+│   ├── run_supplementary.py     ← calibration, significance tests
+│   ├── run_proper_pooling_cv.py ← pooling strategy head-to-head CV
+│   ├── run_analysis.py          ← post-hoc analysis pipeline
+│   └── generate_pub_figures.py  ← generates all paper figures
 │
-├── figures/                     # Figure PNGs for GitHub preview
-│   ├── pub_markers.png          # Narrative density / marker analysis
-│   ├── pub_probing.png          # Layer-wise probing F1
-│   ├── error_analysis.png       # Error analysis breakdown
-│   ├── kfold_cv.png             # K-fold CV config comparison
-│   └── ...                      # 22 more exploratory figures
+├── figures/                     ← PNG previews of all figures
+│   ├── pub_markers.png          ← narrative density analysis (paper Fig. 1)
+│   ├── pub_probing.png          ← layer-wise probing F1 (paper Fig. 2)
+│   ├── error_analysis.png       ← error breakdown (paper Fig. 3)
+│   └── ...                      ← 23 additional exploratory figures
 │
 ├── results/
-│   ├── baselines.json           # Majority, TF-IDF, DeBERTa-base
-│   ├── models.json              # Main model comparison
-│   ├── ablations.json           # Component ablation
-│   ├── kfold.json               # 5-fold CV
-│   ├── improved_cv.json         # CV across ensemble configs
-│   ├── improved_ensemble_H.json # ★ Submitted H_conservative ensemble results
-│   ├── improved_ensemble.json   # Alt-config ensemble
-│   ├── improved_search.json     # Hyperparameter search grid
-│   ├── cv_ablations.json        # CV ablation study
-│   ├── new_experiments.json     # Marker masking & pooling numbers
-│   ├── marker_fusion.json       # Fusion experiment
-│   ├── proper_pooling_cv.json   # Pooling CV comparison
-│   ├── multi_seed.json          # Per-seed variance
-│   ├── ensemble_pr.json         # Ensemble P/R
-│   ├── missing_pr.json          # P/R for all table entries
-│   ├── advanced.json            # Probing, subreddit, noise
-│   ├── supplementary.json       # Calibration, significance
-│   ├── full_results.txt         # Human-readable summary
-│   └── analysis/
-│       ├── bootstrap_ci.json
-│       ├── error_analysis.json
-│       ├── false_positives.json
-│       ├── false_negatives.json
-│       ├── full_analysis.json
-│       ├── full_dev_predictions.json
-│       ├── probability_data.json
-│       ├── seed_comparison.json
-│       └── threshold_sweep.json
+│   ├── improved_ensemble_H.json ← submitted ensemble results
+│   ├── new_experiments.json     ← marker masking numbers
+│   ├── marker_fusion.json       ← fusion experiment results
+│   ├── cv_ablations.json        ← CV ablation study
+│   ├── full_results.txt         ← human-readable summary
+│   ├── analysis/                ← per-sample predictions, FP/FN examples,
+│   │   └── ...                     bootstrap CIs, threshold sweep
+│   └── ...                      ← all other experiment JSONs
 │
-├── models/                      # Checkpoints — gitignored (~1.7 GB each)
-│   ├── improved_H_seed{2026,42,1337,7,2024}.pt  # ★ Submitted 5-seed ensemble
-│   └── best_dual_checkpoint.pt                  # Dual-head baseline
+├── models/                      ← gitignored — ~1.7 GB per checkpoint
+│   └── improved_H_seed{2026,42,1337,7,2024}.pt
 │
 ├── paper/
 │   └── latex/
-│       ├── main.tex             # ★ Final paper source
-│       ├── main.pdf             # ★ Compiled paper (PDFs in figures/ for LaTeX)
-│       ├── references.bib
-│       ├── acl.sty
-│       └── acl_natbib.bst
+│       ├── main.tex             ← paper source
+│       ├── main.pdf             ← compiled paper
+│       └── references.bib
 │
-└── submission/
-    └── submission.jsonl         # Official task submission
+├── submission/
+│   └── submission.jsonl         ← official task submission
+│
+├── requirements.txt
+└── .gitignore
 ```
 
-> **Model checkpoints** are gitignored (`.pt` files, ~1.7 GB each). Retrain with the commands below, or track with Git LFS:
+> **Model weights** (`.pt` files, ~1.7 GB each) are excluded from this repository. Retrain using the instructions below, or host with Git LFS:
 > ```bash
 > git lfs install && git lfs track "models/*.pt" && git add .gitattributes
 > ```
 
-> **Figure PDFs** are gitignored — regenerated by `generate_pub_figures.py`. They are required only if you want to recompile `paper/latex/main.tex` (which uses `\graphicspath{{../../figures/}}`).
+> **Figure PDFs** are excluded (`figures/*.pdf`). They are regenerated automatically by `generate_pub_figures.py` and are only needed to recompile the LaTeX paper (which resolves them via `\graphicspath{{../../figures/}}`).
 
 ---
 
-## Quick Start
+## Reproducing the Results
 
-### Install
+### 1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
-# Python 3.10+, NVIDIA GPU >= 16 GB VRAM (tested on RTX 4080 Super)
 ```
 
-### Data
+Requires Python 3.10+ and an NVIDIA GPU with ≥ 16 GB VRAM (tested on RTX 4080 Super).
 
-Request access from the [task organizers](https://sites.google.com/view/semeval2026-task10). Place files as:
+### 2. Obtain the data
+
+Request access from the [task organisers](https://sites.google.com/view/semeval2026-task10) and place the files as:
 
 ```
 data/
@@ -183,40 +180,42 @@ data/
 └── test.jsonl
 ```
 
-### Train
+### 3. Train
 
 ```bash
-# Full submitted ensemble (5 seeds, H_conservative config)
+# Reproduce the submitted 5-seed ensemble (H_conservative config)
 python code/train_improved.py
 
-# Quick single-seed run
+# Quick single-seed run for development
 python code/train_simple.py --seed 2026
 ```
 
-### Reproduce experiments
+### 4. Run experiments
 
 ```bash
-python code/run_experiments.py        # Baselines + ablations + k-fold
-python code/run_advanced.py           # Layer probing, subreddit, noise
+python code/run_experiments.py        # baselines + ablations + k-fold
+python code/run_advanced.py           # layer probing, subreddit, noise robustness
 python code/run_cv_ablations.py       # CV ablation study
-python code/run_new_experiments.py    # Marker masking
-python code/run_marker_fusion.py      # Marker-count fusion
-python code/run_supplementary.py      # Calibration, significance
-python code/run_analysis.py           # Post-hoc analysis
-python code/generate_pub_figures.py   # Regenerate all figures
+python code/run_new_experiments.py    # marker masking
+python code/run_marker_fusion.py      # marker-count fusion
+python code/run_supplementary.py      # calibration + significance tests
+python code/run_analysis.py           # post-hoc analysis
+python code/generate_pub_figures.py   # regenerate all paper figures
 ```
 
 ---
 
 ## Citation
 
+If you use this code or findings, please cite:
+
 ```bibtex
 @inproceedings{goyal2026truthgradient,
-  title     = {Truth Gradient at {SemEval}-2026 Task 10: Mean Pooling and
-               Narrative Density for Conspiracy Belief Detection},
+  title     = {Truth Gradient at {SemEval}-2026 Task 10:
+               Mean Pooling and Narrative Density for Conspiracy Belief Detection},
   author    = {Goyal, Ekansh},
-  booktitle = {Proceedings of the 20th International Workshop on Semantic
-               Evaluation ({SemEval}-2026)},
+  booktitle = {Proceedings of the 20th International Workshop on
+               Semantic Evaluation ({SemEval}-2026)},
   year      = {2026},
   note      = {To appear}
 }

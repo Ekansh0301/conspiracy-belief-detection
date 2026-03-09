@@ -1,0 +1,902 @@
+[
+  {
+    "_id": "t1_emz6exn",
+    "text": "So according to Trump deeps state John Kerry is directing Iran on what to do. The Obama admin got Ir",
+    "subreddit": "conspiracy",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.6593356728553772,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_f07ejkp",
+    "text": "RFK Jr. claims that CIA operatives destroyed evidence in his father\u2019s assassination that clearly imp",
+    "subreddit": "conspiracy",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5754812359809875,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_f6mnlr1",
+    "text": "The next big anti trump narrative from the NWO since he keeps defying their orders. Make sure you're",
+    "subreddit": "conspiracy",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.6574264764785767,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_iiv2878",
+    "text": "probably the most delusional article I\u2019ve seen in a while. 2/3 of what they\u2019re praising Biden for is",
+    "subreddit": "stupidpol",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.47313830256462097,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gs39jid",
+    "text": "Mar 23, 2021 - Facebook scrubbed a page belonging to Boulder supermarket shooter Ahmad Al-Issa that ",
+    "subreddit": "NEWPOLITIC",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.44622185826301575,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_jn62qay",
+    "text": "after the past months of protests, domestic terror charges, and even a death, the city of Atlanta ha",
+    "subreddit": "moderatepolitics",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5210549831390381,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_fwur2wo",
+    "text": "We don't have enough places to sit. We need more chairs? No...now it's the time of the couch, here i",
+    "subreddit": "ProductViz",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4954267144203186,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_e2y172o",
+    "text": "James Alefantis Rothschild is the owner of Comet Ping Pong - a humble pizza joint in Washington DC; ",
+    "subreddit": "PedoGate",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.6659471988677979,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gxljbtn",
+    "text": "Thirty-five years ago, fighter pilot Oscar Santa Maria Huerta had a real-life Independence Day momen",
+    "subreddit": "Unexplained_Mysteries",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.41410085558891296,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_hr224k8",
+    "text": "Lots going on with Hydrogen in China right now, this is the country that dropped the prices of solar",
+    "subreddit": "Futurology",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.5119189023971558,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_f8vy04o",
+    "text": "Science/math/computer science teacher Anton Petrov talks in layman's language about a possible 5th f",
+    "subreddit": "todayilearned",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.48761239647865295,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_ef0gnwp",
+    "text": "In any case, to wear an improper ~~expression on your face~~  hat on your head  (to look incredulous",
+    "subreddit": "ConspiracyMemes",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.5174767971038818,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_icz6pu9",
+    "text": "I left some verses out in-between, but they also seem questionable. A lot of the things written seem",
+    "subreddit": "conspiracytheories",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.5767698884010315,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_he2rz0z",
+    "text": "so yeah. Started to \"decipher\" the gamestop tweet during a online meeting.. \nI'm so smoothbrained th",
+    "subreddit": "Superstonk",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4860287308692932,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_fo1y982",
+    "text": "Jeffrey Epstein's famous little black book, full of hundreds of well-known elites, celebrities, and ",
+    "subreddit": "TruthLeaks",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6312752962112427,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_k3vr1pl",
+    "text": "Another great mainstream article from USA Today, bringing more attention to just how prevalent the p",
+    "subreddit": "UAP",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.4538271725177765,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_ja4fqdn",
+    "text": "This man took DMT and had, what he claims, an entity possess him. He spent a lot of money after this",
+    "subreddit": "Psychonaut",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.5096740126609802,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_d9xg8p5",
+    "text": "I don't know what's more disgusting - the article or the comments.  Glad I didn't eat before reading",
+    "subreddit": "The_Donald",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.45179304480552673,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_itjkgh4",
+    "text": "Wars, famines, and earthquakes... These are all the beginnings of birth pains. (Mt 24). They have mu",
+    "subreddit": "OccultConspiracy",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.6021732091903687,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gsyqq3c",
+    "text": "Mar 31, 2021 - (Reuters) - Chinese vaccine makers Sinopharm and Sinovac have presented data on their",
+    "subreddit": "Health",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.3502969443798065,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_j42wniy",
+    "text": "On tge 8th of December the 75th anniversary of the Montreux Declaration was held at the European Par",
+    "subreddit": "Africa",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.41512951254844666,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_hbqow6d",
+    "text": "it\u2019s no secret that many world governments, particularly those that have been oriented & aligned wit",
+    "subreddit": "OccultConspiracy",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.7024713754653931,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ivimr2e",
+    "text": "The Boxer has a pretty neat party trick - in under 15 minutes you can swap the entire rear portion o",
+    "subreddit": "WarCollege",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4667082130908966,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_jnra6w0",
+    "text": "This is not a trading post. This is a post to show you, dear bitcoin fren, where Bitcoin is actually",
+    "subreddit": "Bitcoin",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5638304352760315,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gej7l9h",
+    "text": "It\u2019s incredible how one of the worlds most observed companies at the moment can get away with this. ",
+    "subreddit": "ConspiracyII",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.6321507692337036,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_gszcyxn",
+    "text": "Mar 30, 2021 - FBI agents recruited a Proud Boys leader to provide them with information about antif",
+    "subreddit": "AnythingGoesNews",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.3524690866470337,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_f31prdh",
+    "text": "Why are Americans so clueless. Billionaires have reduced their official tax rate by 65% over the las",
+    "subreddit": "socialism",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.5467731356620789,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_fed52vz",
+    "text": "In a major 60 MINUTES investigation, Liam Bartlett reveals an added level of Weinstein wickedness. T",
+    "subreddit": "videos",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.5006576776504517,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_jss2xpx",
+    "text": "This is a podcast episode regarding the defects in America's capitalistic models, and how a socialis",
+    "subreddit": "SocialDemocracy",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.5072583556175232,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_h7voj4w",
+    "text": "Solid breakdown of the spectacle of the eviction moratorium \u201cprotests\u201d versus the material reality -",
+    "subreddit": "stupidpol",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5994707942008972,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_jvysxg3",
+    "text": "Reporter  Matt Laslo  for  askapol.com  got  Sen. Dianne Feinstein [D-CA] . who notably sits on the ",
+    "subreddit": "UFOB",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.5575861930847168,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_ghj0zpf",
+    "text": "I attempt a  TheLastPsychiatrist-style teardown  of a recent essay in the New York Times, with some ",
+    "subreddit": "thelastpsychiatrist",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.4077315032482147,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_ig63qjn",
+    "text": "U.S. Code \u00a7 2381 - Treason \nWhoever, owing allegiance to the United States, levies war against them ",
+    "subreddit": "Wallstreetsilver",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.36740240454673767,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_inlq748",
+    "text": "Paul and Chris open up the Art Bell archive to listen to William Henry discuss his ideas about ancie",
+    "subreddit": "AncientAliens",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.546596884727478,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ge5hkqs",
+    "text": "Tomorrow is December and Georgia is still experiencing issues with their votes to distract people fr",
+    "subreddit": "awfuleverything",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5258532166481018,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_du2sjah",
+    "text": "By original uploader . If mods delete fine, but that won't help anyone. Where are the stars? Wouldn'",
+    "subreddit": "Christianity",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5785371661186218,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gl19ify",
+    "text": "Bodhidharma was a Buddhist monk who lived during the 5th/6th century. He is credited as the transmit",
+    "subreddit": "occult",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.3960324227809906,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_h95q8z9",
+    "text": "In 2015, the President of Egypt launched the Egypt Makes Electronics (EME) initiative. The ultimate ",
+    "subreddit": "Africa",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4631945788860321,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_j3q3rmy",
+    "text": "I haven\u2019t watched this yet it\u2019s a 12 part series the first one rocked my temple and my heart and sou",
+    "subreddit": "Bibleconspiracy",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5985246300697327,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_j5gbh3w",
+    "text": "Harvard\u2019s Kennedy School of Government Dean Douglas Elmendorf was revealed to have vetoed the appoin",
+    "subreddit": "Israel_Palestine",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4694589078426361,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_fywb2mw",
+    "text": "for fans of Faust, this is a fun, or horrifying, read, or annoying probably if you are the r/satanis",
+    "subreddit": "occult",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.4925577938556671,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_hvnzj9o",
+    "text": "aAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA aAaAaAaAaAaAaAaAa",
+    "subreddit": "funny",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.33900362253189087,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_dziugsc",
+    "text": "Tim Pool, angrier than usual, breaks down the mainstream media's failure to honestly address Elon Mu",
+    "subreddit": "KotakuInAction",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.6047554612159729,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_dtzcrz0",
+    "text": "I suggest the moniker KEKker or perhaps Croakker. In any event can you guys hurry up and board yours",
+    "subreddit": "TopMindsOfReddit",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.6047043204307556,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ep7h4y2",
+    "text": "Jeffery Eipstien a convicted child rapist and Donald Trump are very close friends, along with a hand",
+    "subreddit": "ConspiracyMemes",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.6825228333473206,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_fmeeurf",
+    "text": "Falun Gong is like Yoga but different, some say better.  These individuals who practice is are not i",
+    "subreddit": "conspiracytheories",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.5962001085281372,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_grzklo5",
+    "text": "Mar 21, 2021 - KEY HIGHLIGHTS: \n \u2022\u2022The Migration Act allows families who aren't permanent residents ",
+    "subreddit": "world",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.3778865337371826,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_i822ve9",
+    "text": "The GOP has no coherent criticisms of identity politics; they thrive off it. They can't even mount a",
+    "subreddit": "stupidpol",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5591450929641724,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_iz8j4o0",
+    "text": "I represent Plaintiff/Appellant in this case and argued today. The result of SCOTUS sinking Bivens e",
+    "subreddit": "law",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.5023428201675415,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_j61vfbq",
+    "text": "Found this gem on some old burned CD's I was going through this fall. The album this is from, \"Tonig",
+    "subreddit": "redscarepod",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4325726628303528,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_h9d81kh",
+    "text": "Australian protest for freedom this Saturday 21 Aug against suppression of science and free speech, ",
+    "subreddit": "LockdownSkepticismAU",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5739768147468567,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_iqw0u8h",
+    "text": "Small ape trying to do my part. I\u2019m a plumber and I\u2019ve been collecting various metals  for some time",
+    "subreddit": "Wallstreetsilver",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4245000183582306,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gzsdjqd",
+    "text": "Ten years before an alien craft crashed onto rancher Mack Brazel\u2019s property near Roswell, New Mexico",
+    "subreddit": "wanttobelieve",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5981960296630859,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_jtpl6i0",
+    "text": "Hey folks, this is my video that goes over the meaning of what non-human intelligence is. Wanted to ",
+    "subreddit": "aliens",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.46912088990211487,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ge8cdxy",
+    "text": "Posting this two days old article because today Carrie Lam talked about this again, saying that  the",
+    "subreddit": "HongKong",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.466096431016922,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_i39s5cr",
+    "text": "A curfew did not stop most people from voicing their opinions in Sri Lanka today (03/04/2022). There",
+    "subreddit": "worldnews",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5502828359603882,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_f8uwbiu",
+    "text": "Leahs reaction to Becks Scientology statements. \n While i love Leah and all that she is doing she ne",
+    "subreddit": "scientology",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.6193390488624573,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_gbppl9q",
+    "text": "Pfizer's mRNA vaccine reached the number of symptomatic infections for initial analysis (94 infectio",
+    "subreddit": "medicine",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.4960428476333618,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_dkbw6hm",
+    "text": "A continuation of an earlier AAR written collaboratively between myself and u/stealthsaurus. This ch",
+    "subreddit": "WarCollege",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.40671005845069885,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_etzu8la",
+    "text": "Health insurers that treat millions of seniors have overcharged Medicare by nearly $30 billion over ",
+    "subreddit": "news",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.3116764426231384,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_g3dvvsy",
+    "text": "We're all sinners in need of God's mercy, patience, and love. God knows the worst part of us yet he ",
+    "subreddit": "Christianity",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.54012531042099,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gv2c0pn",
+    "text": "Apr 16, 2021 - The momentum towards greening the economy implies transition risks that represent new",
+    "subreddit": "Capitalism",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.31390681862831116,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_jbfcl3l",
+    "text": "The Arkansas Republicans have just passed a law that eliminates one of the few protections underage ",
+    "subreddit": "stupidpol",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4044395387172699,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_jtokukp",
+    "text": "Chris provides our listeners with what will become a new limited series known as Sunday sermons. We\u2019",
+    "subreddit": "LateStageCapitalism",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5633743405342102,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ebb1ul4",
+    "text": "This is an article regarding the signing of The UN Migration Pact - AKA  The Global Compact for Safe",
+    "subreddit": "JordanPeterson",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.5585533380508423,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_kfocsx3",
+    "text": "The Philadelphi Corridor \u2014 or to put it more correctly, the southern closing point [of Gaza] \u2014 must ",
+    "subreddit": "2ndYomKippurWar",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4927544593811035,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_igthcpf",
+    "text": "House Democrats have been arrested by for protesting the overturning of Roe v Wade by the Supreme Co",
+    "subreddit": "NewPatriotism",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.47729256749153137,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_h2vflri",
+    "text": "I found this article on Bret & Heather interesting and thought it would be an interesting read for S",
+    "subreddit": "samharris",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4816564619541168,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gy9x5qb",
+    "text": "obviously this is a huge problem for the places impacted by the cutback of water into the area but i",
+    "subreddit": "PrepperIntel",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.520389199256897,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gzq4gmj",
+    "text": "Although books have been written about the United States Air Force\u2019s war with UFOs, little\u2019s been wr",
+    "subreddit": "wanttobelieve",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4944111108779907,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gxp2r6y",
+    "text": "people may not realize that  India is the largest provider of generic drugs globally. Indian pharmac",
+    "subreddit": "PrepperIntel",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.47389596700668335,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_g8fj0b3",
+    "text": "Just one of many recent reports of offshore tax havens where the wealthy and corporations park their",
+    "subreddit": "LateStageCapitalism",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6311115026473999,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_juiilic",
+    "text": "Video analysis about the Biblical prophesied period called the Great Tribulation and its connection ",
+    "subreddit": "Christianity",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.6237939596176147,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_i4sku3k",
+    "text": "this was on Invisible People\u2019s (advocacy org for the unhoused) social media, and as the article stat",
+    "subreddit": "collapse",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5657327175140381,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_hhvqa53",
+    "text": "Thoughtful, wide-reaching piece on how the Israeli-Palestinian conflict is framed in the West, parti",
+    "subreddit": "neoliberal",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.4555414617061615,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_e2y185a",
+    "text": "James Alefantis Rothschild is the owner of Comet Ping Pong - a humble pizza joint in Washington DC; ",
+    "subreddit": "worldpolitics",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6659471988677979,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_hwb2q87",
+    "text": "The One Dollar Note \n The Great Seal of the United States can be easily viewed on the back of a one-",
+    "subreddit": "FringeTheory",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.45776131749153137,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_keldomq",
+    "text": "Are you SURE you're going to heaven when you die? Absolutely positive you are BORN AGAIN? Or are you",
+    "subreddit": "Christianity",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6219777464866638,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ebbwipj",
+    "text": "Very interesting read and good points. I'm just starting to read the Federal Budget linked in the ar",
+    "subreddit": "Economics",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.43668869137763977,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_hf9nyyx",
+    "text": "Plenty of hints dropping that a major supply shortage is coming soon in Australia. There have been p",
+    "subreddit": "Anarcho_Capitalism",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.5191819071769714,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_i1stb90",
+    "text": "Rwanda has been heralded by the West as a success story and it\u2019s people, who experienced one of the ",
+    "subreddit": "Africa",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5259152054786682,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_intu4l7",
+    "text": "This post is a short introduction to the Russian \"Krona\" Radio Optical Space Object Recognition Comp",
+    "subreddit": "ufo",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.5031281113624573,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_g8m0g5e",
+    "text": "a few years ago I listened to Jordan's talk on art, and found it moving.  I wanted to pay tribute to",
+    "subreddit": "JordanPeterson",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.37959346175193787,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_dsccj9s",
+    "text": "u/polkadotgirl takes another Gish gallop lamenting her life as  busy busy mod of a very dead conspir",
+    "subreddit": "TopMindsOfReddit",
+    "true_label": "Can't tell",
+    "pred_label": "Yes",
+    "prob": 0.5264919400215149,
+    "is_cant_tell": true
+  },
+  {
+    "_id": "t1_gsiidh4",
+    "text": "Mar 24, 2021 - Apple says privacy is a \u201cfundamental human right,\u201d and shielding people\u2019s privacy is ",
+    "subreddit": "NEWPOLITIC",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.32743674516677856,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_g8c7j87",
+    "text": "Ex-journalist Nick Davies wote Flat Earth News ( not  about flat earth conspiracy theory) about the ",
+    "subreddit": "JoeRogan",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5289773344993591,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_g6dsjdr",
+    "text": "Courtesy of the U.K. Column on BITCHute (23/09/20). It\u2019s a terrible thing, but the contemplation of ",
+    "subreddit": "LockdownSkepticism",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.555396318435669,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ik4hyr2",
+    "text": "After Uvalde, many parents realized that the State's enforcers cannot be relied upon. \n That individ",
+    "subreddit": "Libertarian",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.522909939289093,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_hel0lah",
+    "text": "x200B; \n Chinese national, or at least somebody who claims to be, seems to know nothing about Chines",
+    "subreddit": "AsABlackMan",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.49239325523376465,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gx1236f",
+    "text": "To commemorate Jane Jacobs' birthday, Strong Towns is remembering the tragedy of urban renewal. Usin",
+    "subreddit": "urbanplanning",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.43027010560035706,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_idsvamc",
+    "text": "a full analysis of all the infiltrating groups at the Capitol on Jan 6. Among them were ukranian Azo",
+    "subreddit": "conservatives",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5479809045791626,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gju9bqd",
+    "text": "I'm actually a huge fan of them but never noticed these imagery until I found this sub. Their covers",
+    "subreddit": "PastSaturnsRings",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.47873634099960327,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_h1m3v1r",
+    "text": "The G7 agreed to compete with China's belt and road initiative by investing in the infrastructure of",
+    "subreddit": "JoeRogan",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.43705087900161743,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ffdm2qm",
+    "text": "Mass migrations throughout history can be tied to climate change. Climate change is not man made and",
+    "subreddit": "CoincidenceTheorist",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5741887092590332,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_ic8l1ys",
+    "text": "In the near future, internet users will have access to speeds in excess of 10 times those offered by",
+    "subreddit": "technology",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.36767369508743286,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_g9fmaqp",
+    "text": "Luxion sent an email blast earlier which has a link to their new video on youtube. It's a 'sneak pee",
+    "subreddit": "ProductViz",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.45088160037994385,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_k0tb7s8",
+    "text": "Unlike the BRI, which is aimed at securing China\u2019s access to natural resources and building more dir",
+    "subreddit": "GeopoliticsIndia",
+    "true_label": "No",
+    "pred_label": "No",
+    "prob": 0.31690269708633423,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_grux7i5",
+    "text": "Mar 22, 2021 - The price of US retail gasoline is already way up due to Biden\u2019s anti-American and an",
+    "subreddit": "Economics",
+    "true_label": "Yes",
+    "pred_label": "Yes",
+    "prob": 0.5455372929573059,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_dv50ne3",
+    "text": "It seems that more and more Germans are going back to their roots. They are moving out to the countr",
+    "subreddit": "conspiracy",
+    "true_label": "Yes",
+    "pred_label": "No",
+    "prob": 0.4823559820652008,
+    "is_cant_tell": false
+  },
+  {
+    "_id": "t1_gwwzzkr",
+    "text": "I was lucky enough to be a part of a conversation between these two giants. They discuss the role of",
+    "subreddit": "philosophy",
+    "true_label": "Can't tell",
+    "pred_label": "No",
+    "prob": 0.45066675543785095,
+    "is_cant_tell": true
+  }
+]

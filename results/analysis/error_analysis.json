@@ -1,0 +1,21 @@
+{
+  "total_samples": 77,
+  "total_errors": 14,
+  "error_rate": 0.18181818181818182,
+  "false_negatives": 4,
+  "false_positives": 10,
+  "avg_error_prob": 0.5484931937285832,
+  "avg_error_confidence": 0.1614596928868975,
+  "avg_correct_confidence": 0.14040128011552114,
+  "high_confidence_errors": 0,
+  "low_confidence_errors": 13,
+  "prob_distribution": {
+    "0.0-0.2": 0,
+    "0.2-0.4": 12,
+    "0.4-0.6": 55,
+    "0.6-0.8": 10,
+    "0.8-1.0": 0
+  },
+  "avg_error_text_length": 62.0,
+  "avg_all_text_length": 71.18181818181819
+}

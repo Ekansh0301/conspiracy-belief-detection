@@ -1,0 +1,68 @@
+{
+  "individual_seeds": {
+    "2026": {
+      "macro_f1": 0.8094,
+      "precision": 0.8204,
+      "recall": 0.8019,
+      "threshold": 0.595,
+      "temperature": 0.9997,
+      "train_time_sec": 179.2
+    },
+    "42": {
+      "macro_f1": 0.7879,
+      "precision": 0.7857,
+      "recall": 0.7904,
+      "threshold": 0.615,
+      "temperature": 0.9999,
+      "train_time_sec": 185.8
+    },
+    "1337": {
+      "macro_f1": 0.7677,
+      "precision": 0.7735,
+      "recall": 0.7633,
+      "threshold": 0.6,
+      "temperature": 0.9998,
+      "train_time_sec": 226.9
+    },
+    "7": {
+      "macro_f1": 0.8036,
+      "precision": 0.7996,
+      "recall": 0.8089,
+      "threshold": 0.74,
+      "temperature": 0.9997,
+      "train_time_sec": 191.5
+    },
+    "2024": {
+      "macro_f1": 0.7555,
+      "precision": 0.7579,
+      "recall": 0.7533,
+      "threshold": 0.575,
+      "temperature": 0.9998,
+      "train_time_sec": 183.6
+    }
+  },
+  "individual_mean_f1": 0.7848,
+  "individual_std_f1": 0.0206,
+  "avg_prob_ensemble_f1": 0.8289,
+  "avg_prob_threshold": 0.595,
+  "majority_vote_f1": 0.813,
+  "weighted_avg_f1": 0.8162,
+  "weighted_avg_threshold": 0.595,
+  "best_method": "avg_prob",
+  "config_name": "H_conservative",
+  "config": {
+    "desc": "Safe: single-phase + smoothing=0.10 + canttell",
+    "epochs": 9,
+    "lr": 2e-05,
+    "dropout": 0.1,
+    "grad_accum": 2,
+    "patience": 4,
+    "label_smoothing": 0.1,
+    "weight_decay": 0.01,
+    "unfreeze_layers": 6,
+    "max_length": 256,
+    "canttell_as_yes": true,
+    "batch_size": 16
+  },
+  "best_ensemble_f1": 0.8289
+}

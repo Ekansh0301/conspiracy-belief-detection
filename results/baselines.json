@@ -1,0 +1,30 @@
+{
+  "majority": {
+    "name": "Majority Class",
+    "macro_f1": 0.3937,
+    "precision": 0.3247,
+    "recall": 0.5,
+    "accuracy": 0.6494
+  },
+  "random": {
+    "name": "Weighted Random",
+    "macro_f1": 0.487,
+    "precision": 0.4874,
+    "recall": 0.4881,
+    "accuracy": 0.5455
+  },
+  "tfidf_lr": {
+    "name": "TF-IDF + LR",
+    "macro_f1": 0.69,
+    "precision": 0.684,
+    "recall": 0.6693,
+    "accuracy": 0.7143
+  },
+  "tfidf_svm": {
+    "name": "TF-IDF + SVM",
+    "macro_f1": 0.6558,
+    "precision": 0.6682,
+    "recall": 0.6507,
+    "accuracy": 0.7013
+  }
+}

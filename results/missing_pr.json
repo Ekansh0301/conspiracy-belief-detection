@@ -1,0 +1,26 @@
+{
+  "lr_markers": {
+    "f1": 0.618,
+    "precision": 0.623,
+    "recall": 0.62,
+    "accuracy": 0.62
+  },
+  "deberta_base": {
+    "f1": 0.677,
+    "precision": 0.688,
+    "recall": 0.68,
+    "accuracy": 0.68
+  },
+  "roberta_large": {
+    "f1": 0.657,
+    "precision": 0.667,
+    "recall": 0.66,
+    "accuracy": 0.66
+  },
+  "ensemble_deberta_large": {
+    "f1": 0.678,
+    "precision": 0.685,
+    "recall": 0.68,
+    "accuracy": 0.68
+  }
+}

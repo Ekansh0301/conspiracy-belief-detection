@@ -1,0 +1,102 @@
+[
+  {
+    "id": "t1_e2y185a",
+    "text": "James Alefantis Rothschild is the owner of Comet Ping Pong - a humble pizza joint in Washington DC; \n \n \n James Alefantis Rothschild is listed by GQ magazine as the 49th most influential person in Washington DC; \n \n \n \n James Alefantis Rothschild was identified as a central figure in a child trafficking for sex and ritual murder, after Wikileaks published John (The Molester) Podesta's emails; \n \n \n \n Next to the 9/11 nuclear demolition event, #pizzagate remains the most critical / catalytic / ce",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6659471988677979,
+    "confidence": 0.3318943977355957,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_fo1y982",
+    "text": "Jeffrey Epstein's famous little black book, full of hundreds of well-known elites, celebrities, and politicians. It has been said he is an intelligence asset known for his vast collection of  honey-trap blackmail  on high level elites and politicians.  The choice is yours to know. \n WWG1WGA",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6312752962112427,
+    "confidence": 0.26255059242248535,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_g8fj0b3",
+    "text": "Just one of many recent reports of offshore tax havens where the wealthy and corporations park their money so as not to pay taxes. Consequently, the public has \"austerity\" shoved down their throats when with hat in hand, they kindly ask for functuonal public schools, public hospitals, clean water, and a modest social safety net.",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6311115026473999,
+    "confidence": 0.2622230052947998,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_keldomq",
+    "text": "Are you SURE you're going to heaven when you die? Absolutely positive you are BORN AGAIN? Or are you willing to chance your eternal soul and possibly end up in hell fire?? Why not make sure of the matter today, while there is still time? There is nothing more important than this matter, NOTHING!!",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.6219777464866638,
+    "confidence": 0.24395549297332764,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_j3q3rmy",
+    "text": "I haven\u2019t watched this yet it\u2019s a 12 part series the first one rocked my temple and my heart and soul wants to let you know I want Al of you to be saved and not left behind. Jesus and word of God is real and he\u2019s coming as the groom and loves all of you so much his love is real. Everything we think matters just petty if you can slow down let go of the worlds 40-50hr work weeks high gas prices bosses sales reports meting the lawn. All can wait if you don\u2019t have your heart right. Drugs lust ego pr",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5985246300697327,
+    "confidence": 0.19704926013946533,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_du2sjah",
+    "text": "By original uploader . If mods delete fine, but that won't help anyone. Where are the stars? Wouldn't the tires pop? The bible doesn't say anywhere the earth is a ball. It says there is a firmament  that means we can't get out!",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5785371661186218,
+    "confidence": 0.15707433223724365,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_i4sku3k",
+    "text": "this was on Invisible People\u2019s (advocacy org for the unhoused) social media, and as the article states, it\u2019s a dystopian reality where people are being forced to live in the sewers due to stigma and inhumane treatment by law enforcement and the public.",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5657327175140381,
+    "confidence": 0.13146543502807617,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_i39s5cr",
+    "text": "A curfew did not stop most people from voicing their opinions in Sri Lanka today (03/04/2022). There was no major violence to report other and the police using a water canon and tear gas on some university students protesting in the Central Province. During an emergency meeting with the Prime Minister, all cabinet minsters have stated their resignation. The President and the Prime Minister are yet to mention their stance on the situation. People have been protesting near prominent minsters resid",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.5502828359603882,
+    "confidence": 0.10056567192077637,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_g3dvvsy",
+    "text": "We're all sinners in need of God's mercy, patience, and love. God knows the worst part of us yet he decides to overlook that as he forgives us to help us be better followers of Jesus. All we need for forgiveness is the honesty to admit that we are sinners and repent. \n So when you feel down, self condemned, unloved, unheard and any other bad feeling just remember that God deeply loves every one of us and is more than happy to forgive us of any sins we commit.",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.54012531042099,
+    "confidence": 0.08025062084197998,
+    "is_error": true,
+    "error_type": "FP"
+  },
+  {
+    "id": "t1_gy9x5qb",
+    "text": "obviously this is a huge problem for the places impacted by the cutback of water into the area but it is important to note that this can happen  anywhere  and possibly without warning.",
+    "true_label": "No",
+    "pred_label": "Yes",
+    "prob": 0.520389199256897,
+    "confidence": 0.040778398513793945,
+    "is_error": true,
+    "error_type": "FP"
+  }
+]

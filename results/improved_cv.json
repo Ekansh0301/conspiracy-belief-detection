@@ -1,0 +1,122 @@
+{
+  "H_conservative": {
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.7453,
+        "threshold": 0.685,
+        "train_time_sec": 262.8
+      },
+      "fold_1": {
+        "macro_f1": 0.7372,
+        "threshold": 0.38,
+        "train_time_sec": 264.3
+      },
+      "fold_2": {
+        "macro_f1": 0.7299,
+        "threshold": 0.655,
+        "train_time_sec": 300.8
+      },
+      "fold_3": {
+        "macro_f1": 0.725,
+        "threshold": 0.555,
+        "train_time_sec": 302.0
+      },
+      "fold_4": {
+        "macro_f1": 0.7334,
+        "threshold": 0.295,
+        "train_time_sec": 294.3
+      }
+    },
+    "summary": {
+      "mean_f1": 0.7342,
+      "std_f1": 0.0069,
+      "fold_f1s": [
+        0.7453,
+        0.7372,
+        0.7299,
+        0.725,
+        0.7334
+      ]
+    }
+  },
+  "G_kitchen_sink": {
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.749,
+        "threshold": 0.705,
+        "train_time_sec": 469.7
+      },
+      "fold_1": {
+        "macro_f1": 0.7468,
+        "threshold": 0.44,
+        "train_time_sec": 344.6
+      },
+      "fold_2": {
+        "macro_f1": 0.7271,
+        "threshold": 0.745,
+        "train_time_sec": 476.7
+      },
+      "fold_3": {
+        "macro_f1": 0.747,
+        "threshold": 0.665,
+        "train_time_sec": 430.7
+      },
+      "fold_4": {
+        "macro_f1": 0.7431,
+        "threshold": 0.48,
+        "train_time_sec": 469.8
+      }
+    },
+    "summary": {
+      "mean_f1": 0.7426,
+      "std_f1": 0.008,
+      "fold_f1s": [
+        0.749,
+        0.7468,
+        0.7271,
+        0.747,
+        0.7431
+      ]
+    }
+  },
+  "F_short_length": {
+    "folds": {
+      "fold_0": {
+        "macro_f1": 0.7648,
+        "threshold": 0.545,
+        "train_time_sec": 115.5
+      },
+      "fold_1": {
+        "macro_f1": 0.7614,
+        "threshold": 0.645,
+        "train_time_sec": 138.9
+      },
+      "fold_2": {
+        "macro_f1": 0.7694,
+        "threshold": 0.415,
+        "train_time_sec": 104.3
+      },
+      "fold_3": {
+        "macro_f1": 0.7749,
+        "threshold": 0.575,
+        "train_time_sec": 81.0
+      },
+      "fold_4": {
+        "macro_f1": 0.7563,
+        "threshold": 0.34,
+        "train_time_sec": 80.9
+      }
+    },
+    "summary": {
+      "mean_f1": 0.7654,
+      "std_f1": 0.0064,
+      "fold_f1s": [
+        0.7648,
+        0.7614,
+        0.7694,
+        0.7749,
+        0.7563
+      ]
+    }
+  }
+}

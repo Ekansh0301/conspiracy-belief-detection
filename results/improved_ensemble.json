@@ -1,0 +1,68 @@
+{
+  "individual_seeds": {
+    "2026": {
+      "macro_f1": 0.8004,
+      "precision": 0.8004,
+      "recall": 0.8004,
+      "threshold": 0.575,
+      "temperature": 0.9994,
+      "train_time_sec": 77.8
+    },
+    "42": {
+      "macro_f1": 0.813,
+      "precision": 0.816,
+      "recall": 0.8104,
+      "threshold": 0.49,
+      "temperature": 0.9996,
+      "train_time_sec": 88.8
+    },
+    "1337": {
+      "macro_f1": 0.757,
+      "precision": 0.7548,
+      "recall": 0.7774,
+      "threshold": 0.26,
+      "temperature": 0.9996,
+      "train_time_sec": 76.5
+    },
+    "7": {
+      "macro_f1": 0.7717,
+      "precision": 0.7707,
+      "recall": 0.7959,
+      "threshold": 0.37,
+      "temperature": 0.9995,
+      "train_time_sec": 76.2
+    },
+    "2024": {
+      "macro_f1": 0.7693,
+      "precision": 0.7654,
+      "recall": 0.7874,
+      "threshold": 0.48,
+      "temperature": 0.9996,
+      "train_time_sec": 75.4
+    }
+  },
+  "individual_mean_f1": 0.7823,
+  "individual_std_f1": 0.0209,
+  "avg_prob_ensemble_f1": 0.7816,
+  "avg_prob_threshold": 0.38,
+  "majority_vote_f1": 0.7939,
+  "weighted_avg_f1": 0.7816,
+  "weighted_avg_threshold": 0.385,
+  "best_method": "majority_vote",
+  "config_name": "F_short_length",
+  "config": {
+    "desc": "B + max_length=128 (focus on key signal)",
+    "epochs": 12,
+    "lr": 2e-05,
+    "dropout": 0.1,
+    "grad_accum": 2,
+    "patience": 4,
+    "label_smoothing": 0.05,
+    "weight_decay": 0.01,
+    "unfreeze_layers": 6,
+    "max_length": 128,
+    "canttell_as_yes": false,
+    "batch_size": 16
+  },
+  "best_ensemble_f1": 0.7939
+}

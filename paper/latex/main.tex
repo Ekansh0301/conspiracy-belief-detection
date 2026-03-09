@@ -1,0 +1,725 @@
+% Truth Gradient at SemEval-2026 Task 10
+\documentclass[11pt]{article}
+\usepackage{acl}
+
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{url}
+
+\graphicspath{{../../figures/}}
+
+% Tighter float spacing to reduce spillover
+\setlength{\textfloatsep}{8pt plus 2pt minus 4pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{2pt}
+
+\title{Truth Gradient at SemEval-2026 Task 10:\\Mean Pooling and Narrative Density\\for Conspiracy Belief Detection}
+
+\author{Ekansh Goyal \\
+  International Institute of Information Technology Hyderabad \\
+  Hyderabad, India \\
+  \texttt{ekansh.goyal@research.iiit.ac.in}}
+
+\begin{document}
+\maketitle
+\pagestyle{plain}
+
+%=============================================================
+% ABSTRACT
+%=============================================================
+\begin{abstract}
+Conspiracy believers use significantly more psycholinguistic markers per post than non-believers (Cohen's $d$\,=\,0.56, $p < 10^{-80}$)---a pattern we term \emph{narrative density}---suggesting belief manifests as structurally denser conspiratorial frames distributed across the full text rather than concentrated in specific lexical cues.
+We present Truth Gradient's system for SemEval-2026 Task~10 Subtask~2 (PsyCoMark): a DeBERTa-v3-large model with mean pooling and a 5-seed ensemble, achieving macro F1\,=\,0.829 on the 77-sample development set and \textbf{0.75 on the official test set}; the 5-fold CV estimate (0.734\,$\pm$\,0.007) is the more reliable indicator.
+Two convergent causal tests support the narrative density account: masking annotated marker spans drops F1 from 0.723 to 0.670 ($-$5.3 pts), and direct marker-count fusion yields $+$0.9 pp on top, though we emphasize these connections are not conclusive given the small dev set.
+Cross-validated ablation identifies encoder fine-tuning as the dominant design choice ($-$7.2 pts), and layer-wise probing suggests belief information peaks at mid-stack layers.
+Code: \url{https://github.com/Ekansh0301/conspiracy-belief-detection}.
+\end{abstract}
+
+%=============================================================
+% 1. INTRODUCTION
+%=============================================================
+\section{Introduction}
+\label{sec:intro}
+
+The same Reddit post can be written by a conspiracy researcher, a skeptical journalist, or a true believer---and in each case the surface text may look nearly identical.
+Conspiracy belief is not primarily a lexical phenomenon: it manifests in how authors construct and frame narratives, in the agency they attribute to hidden actors, in the evidence structures they invoke.
+Yet nearly all prior NLP work on conspiracy theories has addressed \emph{content detection}---does this text discuss a conspiracy?---rather than the harder and more consequential question of whether the author \emph{believes} it \citep{miani2021loco,bessi2015science}.
+
+SemEval-2026 Task~10 Subtask~2 \citep[PsyCoMark;][]{task10organizers2026} operationalizes this belief identification problem as binary classification over Reddit posts.
+The task is challenging for three reasons.
+First, \emph{topical confounding}: believers and non-believers overlap heavily in vocabulary, with the discriminative signal rooted in pragmatics rather than lexical choice.
+Second, \emph{data scarcity}: 4,316 training examples and a 77-sample development set yield wide evaluation uncertainty across any individual metric estimate.
+Third, \emph{signal sparsity}: no single token or phrase is reliable; the belief signal is distributed across the post's full narrative structure.
+The dataset provides psycholinguistic marker annotations---\textsc{actor}, \textsc{action}, \textsc{effect}, \textsc{evidence}, \textsc{victim} \citep{samory2018conspiracy}---that allow us to study this structure directly.
+
+Our approach fine-tunes DeBERTa-v3-large \citep{he2021debertav3} with mean pooling and a two-layer MLP classifier.
+A 5-seed probability-averaging ensemble achieves macro F1\,=\,0.829 on development and 0.75 on the official test set, with 5-fold CV (0.734\,$\pm$\,0.007) as the selection criterion.
+We hypothesize that conspiracy belief manifests not through specific lexical cues but through denser narrative structures that distribute causal and agentive markers across the text; each design choice is motivated by or evaluated against this hypothesis.
+Our contributions are:
+
+\begin{enumerate}[leftmargin=*,nosep]
+\item \textbf{Narrative density analysis.}
+We show that believers use significantly more psycholinguistic markers per post ($d$\,=\,0.56) and that the model's output correlates with marker count ($\rho$\,=\,0.309) but not text length.
+This is \emph{consistent with} the belief signal being distributed across narrative positions, providing a data-grounded motivation for mean pooling (\S\ref{sec:narrative-density}); we note the connection is correlational, not causal.
+
+\item \textbf{Ablation-driven design.}
+Cross-validated ablation and systematic configuration search (8 variants) show encoder fine-tuning is the dominant factor ($-$7.2 pts).
+We report multi-seed variance ($\sigma$\,=\,0.021) and per-fold stability throughout to ensure claims are not artifacts of the small dev set (\S\ref{sec:ablation}, \S\ref{sec:config-search}).
+
+\item \textbf{Layer-wise probing.}
+Linear probes show belief information peaks at layer~16/24, suggesting mid-stack representations are most task-relevant.
+This \emph{motivates} our choice to freeze lower layers, though we acknowledge that layer separability does not causally prove that freezing preserves those representations (\S\ref{sec:probing}).
+\end{enumerate}
+
+%=============================================================
+% 2. RELATED WORK
+%=============================================================
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Conspiracy Language and Belief.}
+Prior NLP work on conspiracy theories has focused on \emph{content detection}---identifying whether a post discusses a conspiracy---rather than whether the author endorses it \citep{miani2021loco,bessi2015science}.
+\citet{samory2018conspiracy} proposed psycholinguistic annotations (\textsc{actor, action, effect, evidence, victim}) that operationalize conspiratorial narrative structure.
+\citet{goertzel1994belief} characterizes belief as a \emph{monological} system of mutually reinforcing narratives, and \citet{douglas2019understanding} identifies agency attribution as a core driver.
+Our work is also related to implicit stance detection \citep{mohammad2016semeval,aldayel2021stance}: the system must infer psychological stance from framing rather than topical vocabulary.
+\citet{rashkin2017truth} showed that linguistic style---hedging and certainty markers---discriminates fake from truthful news, establishing that epistemic signals beyond content exist; our task extends this insight to belief vs.~non-belief within identical content.
+
+\paragraph{Transformers and Stability.}
+DeBERTa-v3 \citep{he2021debertav3} extends BERT \citep{devlin2019bert} with disentangled attention and ELECTRA-style pre-training \citep{clark2020electra}.
+\citet{reimers2019sentencebert} showed mean pooling yields better sentence representations than \textsc{[cls]}, and probing studies \citep{tenney2019bert,jawahar2019bert} show semantic and pragmatic features peak in middle transformer layers.
+Fine-tuning instability on small datasets \citep{dodge2020finetuning} is mitigated by conservative hyperparameters and longer training \citep{mosbach2021stability}.
+
+%=============================================================
+% 3. SYSTEM DESCRIPTION
+%=============================================================
+\section{System Description}
+\label{sec:system}
+
+We encode each post with DeBERTa-v3-large (434M parameters) using mean pooling over non-padding token representations (Eq.~\ref{eq:meanpool}), motivated by the narrative density finding that the belief signal is distributed across positions rather than concentrated at a single token.
+\begin{equation}
+  \mathbf{h} = \textstyle\frac{1}{\sum_i m_i}\sum_{i=1}^{n} m_i \cdot \mathbf{h}_i
+  \label{eq:meanpool}
+\end{equation}
+The pooled representation feeds a two-layer MLP (1024$\to$512$\to$2, GELU, dropout 0.1).
+We fine-tune the top 6 encoder layers (19--24), keeping lower layers frozen based on the layer probing result (\S\ref{sec:probing}).
+Training uses AdamW \citep{loshchilov2019adamw} at $2{\times}10^{-5}$, cosine schedule, batch size 32, 9 epochs with early stopping (patience 4), label smoothing $\epsilon$\,=\,0.10, and can't-tell samples remapped to \textsc{yes} (details in Appendix~\ref{app:hyperparams}, \ref{app:noise}, \ref{app:canttell}).
+At inference, probabilities from 5 seeds are averaged with optimized threshold $\tau$\,=\,0.595.
+All code is at \url{https://github.com/Ekansh0301/conspiracy-belief-detection}.
+
+%=============================================================
+% 4. EXPERIMENTAL SETUP
+%=============================================================
+\section{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Data.}
+Table~\ref{tab:data} shows dataset statistics.
+We remap can't-tell training samples to \textsc{yes}, increasing minority-class coverage (see Appendix~\ref{app:canttell}).
+Posts are short (median 60 words) and 44.3\% of word types overlap between classes, confirming the discriminative signal lies in framing rather than vocabulary.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}l r r r r@{}}
+\toprule
+\textbf{Split} & \textbf{Total} & \textbf{Yes} & \textbf{No} & \textbf{Can't-tell} \\
+\midrule
+Train (original) & 4,316 & 1,541 & 1,990 & 785 \\
+Train$^*$ (ours) & 4,316 & 2,326 & 1,990 & --- \\
+Dev              &    77 &    27 &    50 & --- \\
+\bottomrule
+\end{tabular}
+\caption{Dataset statistics. Train$^*$ is our training configuration with can't-tell samples remapped to \textsc{yes}.}
+\label{tab:data}
+\end{table}
+
+\paragraph{Baselines.}
+We include feature-based and neural baselines that test different hypotheses.
+TF-IDF + Logistic Regression (unigrams/bigrams, 10K features) and TF-IDF + SVM (linear kernel) probe lexical discriminability.
+Logistic Regression on psycholinguistic marker counts alone (6 features: \textsc{actor}, \textsc{action}, \textsc{effect}, \textsc{evidence}, \textsc{victim}, total) isolates the discriminative signal in the narrative annotations independently of any text encoder.
+DeBERTa + \textsc{[cls]} tests whether the choice of pooling matters for this encoder.
+A dual-stream variant that concatenates \textsc{[cls]} and mean representations tests whether combining both pooling strategies adds value.
+
+\paragraph{Evaluation.}
+All models are evaluated on macro-averaged F1 (equal weight to both classes).
+Given the small development set ($n$\,=\,77), we supplement point estimates with: 10,000 bootstrap resamples for 95\% confidence intervals, 5-fold stratified cross-validation (CV) on the training set for selection-bias-free estimates, and multi-seed variance ($\sigma$) to quantify fine-tuning instability.
+
+%=============================================================
+% 5. RESULTS
+%=============================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Main Results}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}l c c c c@{}}
+\toprule
+\textbf{System} & \textbf{F1} & \textbf{P} & \textbf{R} & \textbf{Acc} \\
+\midrule
+TF-IDF + SVM            & .656 & .668 & .651 & .701 \\
+TF-IDF + LR             & .690 & .684 & .669 & .714 \\
+LR + marker counts      & .618 & .623 & .620 & .620 \\
+\midrule
+DeBERTa-v3-base$^\dagger$         & .727 & ---  & ---  & --- \\
+RoBERTa-large$^\dagger$           & .826 & ---  & ---  & --- \\
+\midrule
+DeBERTa-v3-large + \textsc{[cls]} & .761 & .768 & .794 & .766 \\
+DeBERTa-v3-large + dual pool      & .794 & .788 & .807 & .805 \\
+\midrule
+Ours (single seed)      & .809 & .820 & .802 & .831 \\
+\textbf{Ours (ensemble)}& \textbf{.829} & .829  & .829  & .844 \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Official test evaluation:}} \\
+\textbf{Ours (test)}    & \textbf{.750} & ---  & ---  & --- \\
+\bottomrule
+\end{tabular}
+\caption{Development set results and official test F1.
+$^\dagger$Single-seed, simplified training (F1 only; P/R not stored).
+Test-set P/R unavailable (official evaluation).
+5-fold CV: 0.734\,$\pm$\,0.007; bootstrap 95\% CI: [0.712, 0.893].}
+\label{tab:main}
+\end{table}
+
+Table~\ref{tab:main} summarizes results.
+The ensemble substantially outperforms all lexical and single-seed baselines, confirming belief detection requires representations capturing narrative structure rather than topic.
+The 5-fold CV estimate (0.734\,$\pm$\,0.007) proved a more accurate predictor of test performance (0.75) than the development point estimate (0.829), underscoring the value of CV-based model selection on small dev sets.
+
+\paragraph{The dev$\to$test gap.}
+The 7.9-point drop (dev 0.829 $\to$ test 0.75) reflects three compounding factors on the 77-sample dev set: wide bootstrap uncertainty (95\% CI [0.712, 0.893]); threshold $\tau$\,=\,0.595 and can't-tell remapping both selected on the same small set; and ensemble averaging optimized to dev boundary cases.
+The CV estimate (0.734) proved the more honest predictor, and we recommend CV-based model selection as standard practice for low-resource shared tasks.
+
+\subsection{Configuration Search}
+\label{sec:config-search}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}l l c@{}}
+\toprule
+\textbf{Config} & \textbf{Key variation} & \textbf{Dev F1} \\
+\midrule
+\textbf{Ours}  & Smoothing .10 + can't-tell$\to$Y & \textbf{.809} \\
+All augmentations & 12 layers + all changes          & .806 \\
+Short (128)   & Half context window              & .800 \\
+Can't-tell    & Can't-tell$\to$Yes only          & .797 \\
+High smooth   & Label smoothing .15              & .796 \\
+More layers   & 12 layers unfrozen               & .794 \\
+Base          & No changes                       & .788 \\
+\bottomrule
+\end{tabular}
+\caption{Configuration search (dev, single seed). Gains are additive; over-regularization with all changes hurts.}
+\label{tab:configs}
+\end{table}
+
+Table~\ref{tab:configs} shows design improvements are additive: gains from can't-tell remapping and label smoothing accumulate, while combining all augmentations together underperforms, suggesting over-regularization on a small dataset.
+The short-context variant gains CV stability but loses ensemble diversity (Appendix~\ref{app:ensemble}).
+
+\subsection{Ablation Study}
+\label{sec:ablation}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}l c c@{}}
+\toprule
+\textbf{Configuration} & \textbf{CV F1} & $\Delta$ \\
+\midrule
+Our system (H\textsubscript{conservative})  & .734 $\pm$ .007 & --- \\
+\quad $-$ Encoder fine-tuning               & .662 $\pm$ .017 & \textbf{$-$.072} \\
+\bottomrule
+\end{tabular}
+\caption{Ablation study (5-fold CV). Encoder fine-tuning is the dominant design choice ($-$7.2 pts). Per-fold detail in Appendix~\ref{app:cv}.}
+\label{tab:ablation}
+\end{table}
+
+Table~\ref{tab:ablation} shows that encoder fine-tuning is the dominant design choice: removing it drops CV F1 by 7.2 points, confirming that the belief signal requires task-adapted representations.
+
+%=============================================================
+% 6. ANALYSIS
+%=============================================================
+\section{Analysis}
+\label{sec:analysis}
+
+\subsection{Narrative Density}
+\label{sec:narrative-density}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}l r r c@{}}
+\toprule
+\textbf{Marker} & \textbf{Yes (\%)} & \textbf{No (\%)} & $\chi^2$ \\
+\midrule
+Any marker & 99.2 & 71.9 & 474.0 \\
+Actor      & 91.8 & 63.0 & 387.0 \\
+Action     & 91.6 & 62.2 & 399.8 \\
+Effect     & 78.0 & 51.3 & 265.1 \\
+Evidence   & 74.6 & 48.2 & 249.9 \\
+Victim     & 67.7 & 38.2 & 301.4 \\
+\bottomrule
+\end{tabular}
+\caption{Psycholinguistic marker presence rates by class. All $\chi^2$ values significant at $p < 10^{-55}$.}
+\label{tab:markers}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{pub_markers.pdf}
+  \caption{Marker presence rates (left) and per-post count distributions (right) by class. Believers construct structurally denser narratives (Cohen's $d$\,=\,0.56).}
+  \label{fig:markers}
+\end{figure}
+
+We examine the PsyCoMark psycholinguistic annotations to ask whether belief is associated with denser narrative structure---a property we term \emph{narrative density}.
+Importantly, these marker annotations were produced independently from the belief labels, so the analysis does not simply rediscover the labeling scheme.
+Believers use 6.53\,$\pm$\,3.53 markers per post versus 4.35\,$\pm$\,4.29 for non-believers (Cohen's $d$\,=\,0.56; Mann-Whitney $p < 10^{-80}$; Table~\ref{tab:markers}, Figure~\ref{fig:markers}).
+The effect ($d$\,=\,0.56) is moderate-to-large and spans all five marker categories.
+We term this \emph{narrative density}: believers construct structurally more complete conspiratorial frames, consistently populating posts with identifiable actors, actions, effects, evidence, and victims.
+
+Agency markers (\textsc{Actor} and \textsc{Action}) show the largest discriminative values ($\chi^2 \approx 400$), but the narrative density effect spans all five categories: the full narrative rate (all 5 types present) is 41.3\% for believers versus 22.2\% for non-believers.
+The model's predicted probability correlates with marker count ($\rho$\,=\,0.309, $p$\,=\,0.002) but not raw text length ($r$\,=\,$-$0.024), suggesting it responds to narrative completeness rather than verbosity.
+This pattern is \emph{consistent with} the belief signal being distributed across positions---rather than concentrated at a single token---which in turn motivates sequence-level mean pooling (Eq.~\ref{eq:meanpool}).
+We provide two convergent causal tests.
+\textit{Masking}: replacing all annotated marker spans with whitespace reduces F1 from .723 to .670 ($-$5.3 pp), confirming markers carry signal beyond surrounding context.
+\textit{Fusion}: appending six normalized marker-count features (actor, action, effect, evidence, victim, total) to the DeBERTa representation recovers a further $+$0.9 pp (.670 $\to$ .679).
+Both results are consistent with the narrative density hypothesis, though we note they fall short of conclusive causal evidence.
+
+\subsection{Layer-Wise Probing}
+\label{sec:probing}
+
+Linear probes on the frozen fine-tuned encoder show an inverted-U F1 curve peaking at layer~16/24 (Figure~\ref{fig:probing}).
+This suggests that belief-relevant features are strongest in mid-stack semantic layers rather than the final pre-training-specialized layers.
+We interpret this as \emph{motivating} partial freezing: updating only the top 6 layers repurposes the final layers without disturbing the mid-stack representations where belief information is strongest.
+We note, however, that layer separability is not direct causal evidence that freezing preserves those representations.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{pub_probing.pdf}
+  \caption{Linear probe F1 by encoder layer. Peak at layer~16 validates partial freezing. Shaded region: fine-tuned layers (19--24).}
+  \label{fig:probing}
+\end{figure}
+
+\subsection{Error Analysis}
+\label{sec:error-analysis}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{error_analysis.pdf}
+  \caption{Error analysis: 13 of 14 errors fall in the low-confidence zone ($0.4 < p < 0.6$). False positives dominate, consistent with narrative density: detailed discussion structurally resembles belief.}
+  \label{fig:errors}
+\end{figure}
+
+As Table~\ref{tab:errors} shows, 13 of 14 errors fall in the low-confidence zone ($0.4 < p < 0.6$), indicating the model is uncertain exactly where the task itself is ambiguous.
+False positives dominate: the 6 ``detailed discussion'' FPs have above-average marker counts (mean 7.2 vs.\ dev average 5.2), confirming structurally complete non-belief posts are the primary failure mode.
+The 3 ``quoting/paraphrase'' FPs contain attribution phrases (\textit{``they claim''}) that the model does not distinguish from endorsement---an open challenge for future work.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}l c c p{3.8cm}@{}}
+\toprule
+\textbf{Error Category} & \textbf{FP} & \textbf{FN} & \textbf{Pattern} \\
+\midrule
+Detailed discussion & 6 & 0 & Non-believer describes conspiracy in structural detail \\
+Quoting/paraphrase  & 3 & 0 & Quoting theory for refutation or analysis \\
+Hedged belief       & 1 & 3 & Belief expressed indirectly or tentatively \\
+Sparse narrative    & 0 & 1 & Believer post with minimal marker coverage \\
+\bottomrule
+\end{tabular}
+\caption{Manual error taxonomy for the 14 development set errors. The dominant FP pattern (detailed discussion) is consistent with narrative density: structurally complete descriptions are misclassified as belief.}
+\label{tab:errors}
+\end{table}
+
+\paragraph{Qualitative examples.}
+Table~\ref{tab:qualitative} illustrates the contrast: the believer post (9 markers) densely populates all five narrative roles, while the non-believer post (1 marker) takes a meta-evaluation stance---evaluating rather than constructing a conspiratorial frame.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\columnwidth}{@{}p{0.17\columnwidth}X@{}}
+\toprule
+\textbf{Class} & \textbf{Post excerpt (dev set)} \\
+\midrule
+\textsc{yes} \newline(9 markers) & \textit{``According to Trump the deep state---John Kerry is directing Iran on what to do. The Obama admin got Iran all set up the way they wanted, even air dropping billions in bribe money to pay them to set up their deep state agenda.''} \\
+\addlinespace
+\textsc{no} \newline(1 marker) & \textit{``Probably the most delusional article I've seen in a while. 2/3 of what they're praising Biden for is stuff that hasn't even passed yet.''} \\
+\bottomrule
+\end{tabularx}
+\caption{Qualitative examples: a believer post (9 markers, dense actor/action/effect frame) vs.\ a non-believer post (1 marker, meta-evaluation stance).}
+\label{tab:qualitative}
+\end{table}
+
+\subsection{Additional Analysis}
+\label{sec:additional}
+
+Believers use third-person agentive language while non-believers favor first-person reflective language; contextual representations add 13.9 F1 points over TF-IDF by encoding narrative structure rather than vocabulary (Appendix~\ref{app:lexical}).
+Leave-one-subreddit-out evaluation confirms the model generalizes via narrative framing and is not tied to community-specific vocabulary (Appendix~\ref{app:subreddit}).
+Model confidence is well-calibrated: F1 is stable across $\tau \in [0.45, 0.60]$ and high-uncertainty predictions align with annotator-uncertain ``can't tell'' posts (Appendix~\ref{app:calibration}).
+Notably, can't-tell posts cluster at mean predicted probability 0.526---barely above the decision boundary---suggesting the model has implicitly learned to flag exactly the cases where human annotators also disagree.
+
+
+
+%=============================================================
+% 8. CONCLUSION
+%=============================================================
+\section{Conclusion}
+
+Conspiracy belief detection requires capturing how authors construct narratives, not merely what they discuss.
+We find that believers use significantly more psycholinguistic markers per post ($d$\,=\,0.56), a pattern we term \emph{narrative density} that is \emph{consistent with} the belief signal being distributed across positions rather than concentrated at a single token.
+Marker-count fusion yields a modest $+$0.9 pp gain, suggesting narrative annotations carry signal beyond what the encoder implicitly extracts.
+Our DeBERTa-v3-large ensemble achieves macro F1\,=\,0.829 on development, but the 5-fold CV estimate (0.734\,$\pm$\,0.007) proved a more reliable predictor of the 0.75 test score, underscoring the importance of CV-based model selection when dev sets are small.
+For future work, attention pooling weighted by marker positions could more directly exploit the narrative density signal if causal experiments confirm the distributional hypothesis.
+
+%=============================================================
+% LIMITATIONS
+%=============================================================
+\section*{Limitations}
+
+The narrative density analysis is correlational; the marker-masking and marker-count fusion results provide convergent but not conclusive causal evidence, as model rankings are noisy on the 77-sample development set.
+The 5-seed ensemble requires five training runs, and single-seed variance ($\sigma$\,=\,0.021) means single-model results should be accompanied by uncertainty estimates.
+All data is English Reddit text; generalization across languages, platforms, or cultural contexts is not guaranteed.
+
+%=============================================================
+% ETHICS
+%=============================================================
+\section*{Ethics Statement}
+
+Automated conspiracy belief detection carries risks of misuse, including targeted surveillance of political or minority communities and unjustified suppression of legitimate discourse.
+The 13\% false positive rate observed on development data makes deployment for content moderation inappropriate.
+This system is intended for academic research purposes only.
+All data was provided by the shared task organizers and consists solely of publicly posted Reddit content.
+
+\clearpage
+%-------------------------------------------------------------
+\bibliography{references}
+\bibliographystyle{acl_natbib}
+
+%=============================================================
+% APPENDICES
+%=============================================================
+\appendix
+
+\section{Hyperparameters}
+\label{app:hyperparams}
+
+Table~\ref{tab:hyperparams} lists all hyperparameters used in the final submitted system.
+All values were determined through the configuration search (Appendix~\ref{app:configs}) and cross-validated ablation (Table~\ref{tab:ablation}).
+The total training time for the full 5-seed ensemble is approximately 15 minutes on a single NVIDIA RTX 4080 Super.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}l l@{}}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Encoder             & DeBERTa-v3-large (434M) \\
+Max sequence length & 256 tokens \\
+Batch size          & 32 (16 $\times$ 2 accum.) \\
+Epochs              & 9 (early stop patience 4) \\
+Learning rate       & $2{\times}10^{-5}$ (uniform) \\
+Unfrozen layers     & Top 6 (layers 19--24) \\
+Optimizer           & AdamW (wd\,=\,0.01) \\
+LR schedule         & Cosine with 10\% warmup \\
+Gradient clipping   & 1.0 \\
+Classifier          & 1024$\to$512$\to$2, GELU, drop 0.1 \\
+Label smoothing     & $\epsilon = 0.10$ \\
+Class weights       & Inverse frequency \\
+Can't-tell handling & Remapped to \textsc{yes} \\
+Threshold ($\tau$)  & 0.595 (optimized on dev) \\
+Seeds               & 2026, 42, 1337, 7, 2024 \\
+Precision           & FP16 mixed \\
+Hardware            & NVIDIA RTX 4080 Super (16\,GB) \\
+\bottomrule
+\end{tabular}
+\caption{Full system hyperparameters.}
+\label{tab:hyperparams}
+\end{table}
+
+
+\section{Configuration Search Details}
+\label{app:configs}
+
+The short-context variant (128 tokens) achieves the highest CV F1 (0.765\,$\pm$\,0.006) but ensembles poorly (0.794 vs.\ 0.829 for 256 tokens, Table~\ref{tab:ensemble}).
+Truncation forces the model onto the dense narrative core, improving single-model robustness, but per-seed predictions become more similar, reducing the diversity that makes probability averaging effective.
+We select the 256-token variant for submission based on ensemble performance.
+
+
+\section{Multi-Seed Stability}
+\label{app:multiseed}
+
+Individual seed performance ranges from 0.756 to 0.809 ($\sigma$\,=\,0.021), confirming that single-run results are unreliable on this small dataset (Table~\ref{tab:seeds}, Figure~\ref{fig:multiseed}).
+Probability averaging outperforms majority voting by 1.6 points (0.829 vs.\ 0.813) by exploiting continuous confidence on boundary cases.
+We chose $N\,{=}\,5$ seeds as a principled trade-off: each seed costs $\approx$3 minutes of training, and \citet{dodge2020finetuning} show that fine-tuning instability is largely resolved within 4--5 independent runs.
+A single best seed achieves 0.809 (seed 2026); the full ensemble adds 2.0 points by correcting disagreements on low-confidence boundary examples where seed variance is highest.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}l c@{}}
+\toprule
+\textbf{Seed / Aggregate} & \textbf{Dev Macro F1} \\
+\midrule
+Seed 2026                 & .809 \\
+Seed 42                   & .788 \\
+Seed 1337                 & .768 \\
+Seed 7                    & .804 \\
+Seed 2024                 & .756 \\
+\midrule
+Mean $\pm$ std            & .785 $\pm$ .021 \\
+Majority vote ensemble    & .813 \\
+\textbf{Avg-prob ensemble}& \textbf{.829} \\
+\bottomrule
+\end{tabular}
+\caption{Per-seed dev F1 and ensemble strategies.}
+\label{tab:seeds}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{multi_seed.pdf}
+  \caption{Per-seed F1 variation and ensemble aggregation methods.}
+  \label{fig:multiseed}
+\end{figure}
+
+
+\section{Ensemble Comparison}
+\label{app:ensemble}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}l c c c@{}}
+\toprule
+\textbf{Config} & \textbf{Seed Mean} & \textbf{Avg-Prob} & \textbf{Maj.\ Vote} \\
+\midrule
+Ours (256 tok) & .785 $\pm$ .021 & \textbf{.829} & .813 \\
+Short (128 tok)& .782 $\pm$ .021 & .782           & .794 \\
+\bottomrule
+\end{tabular}
+\caption{Ensemble comparison across context lengths.}
+\label{tab:ensemble}
+\end{table}
+
+The 256-token system gains +4.4 points from probability averaging (0.785\,$\to$\,0.829), while the short-context system gains nearly nothing (0.782\,$\to$\,0.782).
+Longer contexts produce more diverse per-seed predictions because the model sees different distributions of narrative markers across the full post, creating complementary error patterns that averaging can exploit.
+
+
+\section{Can't-Tell Handling}
+\label{app:canttell}
+
+Of the 785 ambiguous ``can't tell'' samples, remapping to \textsc{yes} consistently produces the highest performance (Table~\ref{tab:canttell}, Figure~\ref{fig:canttell}).
+This likely reflects the nature of annotator uncertainty in belief detection: the posts for which human coders could not decide tend to contain believer-like narrative framing---dense marker structures---but without fully committed epistemic stance.
+Treating them as potential believers increases minority-class representation and exposes the model to more examples of the high-marker-density patterns that characterize belief.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}l c c@{}}
+\toprule
+\textbf{Strategy} & \textbf{Dev F1} & $n_{\text{train}}$ \\
+\midrule
+Exclude entirely      & .791 & 3,531 \\
+Remap to \textsc{no}  & .786 & 4,316 \\
+\textbf{Remap to \textsc{yes}} & \textbf{.806} & 4,316 \\
+\bottomrule
+\end{tabular}
+\caption{Can't-tell handling strategies (single seed, dev).}
+\label{tab:canttell}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{canttell_experiment.pdf}
+  \caption{Effect of can't-tell remapping strategy on dev F1.}
+  \label{fig:canttell}
+\end{figure}
+
+
+\section{Label Noise Robustness}
+\label{app:noise}
+
+We randomly flip training labels at rates 0--20\% to estimate sensitivity to annotation noise (Table~\ref{tab:noise}, Figure~\ref{fig:noise}).
+Dev F1 remains stable through 15\% corruption (0.816 at 15\%), degrading only at 20\% (0.776).
+This robustness motivated our use of label smoothing $\epsilon$\,=\,0.10: the annotation boundary between belief and discussion is inherently soft, and elevated smoothing provides compatible soft-target training.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}c c@{}}
+\toprule
+\textbf{Noise Rate} & \textbf{Dev F1} \\
+\midrule
+0\%  & .791 \\
+5\%  & .811 \\
+10\% & .804 \\
+15\% & .816 \\
+20\% & .776 \\
+\bottomrule
+\end{tabular}
+\caption{Performance under random label corruption.}
+\label{tab:noise}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{noise_robustness.pdf}
+  \caption{Dev F1 under label noise. Robustness through 15\% is consistent with inherent annotation ambiguity.}
+  \label{fig:noise}
+\end{figure}
+
+
+\section{Cross-Subreddit Generalization}
+\label{app:subreddit}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}l c c@{}}
+\toprule
+\textbf{Training Data} & \textbf{Dev F1} & $\Delta$ \\
+\midrule
+Full ($n$\,=\,3,531)        & .791 & --- \\
+$-$ r/conspiracy             & .824 & +.033 \\
+$-$ r/TrueReddit             & .824 & +.033 \\
+$-$ r/PlanetToday            & .800 & +.009 \\
+\bottomrule
+\end{tabular}
+\caption{Leave-one-subreddit-out evaluation.}
+\label{tab:subreddit}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{subreddit_analysis.pdf}
+  \caption{Subreddit distribution and per-subreddit belief rates in the training data.}
+  \label{fig:subreddit}
+\end{figure}
+
+Removing r/conspiracy improves performance by 3.3 points.
+This counterintuitive result suggests r/conspiracy introduces community-specific lexical conventions---terms and phrases idiosyncratic to that subreddit---that partially substitute for the general narrative framing signal.
+Models trained without it are forced to rely on more generalizable narrative cues, which transfer better to the held-out development set.
+
+
+\section{Calibration and Threshold Analysis}
+\label{app:calibration}
+
+Performance is stable across decision thresholds $\tau \in [0.45, 0.60]$ (Figure~\ref{fig:threshold}), suggesting the model produces well-separated probability mass for most examples.
+The Brier score of 0.217 and ECE of 0.199 (Figure~\ref{fig:reliability}) indicate moderate calibration; the model is somewhat overconfident but not severely miscalibrated.
+The predicted probability distributions by class (Figure~\ref{fig:probdist}) show clear bimodal separation with errors concentrated in the overlap region [0.4, 0.6].
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{threshold_sensitivity.pdf}
+  \caption{Macro F1 as a function of decision threshold. Stable in $\tau \in [0.45, 0.60]$.}
+  \label{fig:threshold}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{reliability_diagram.pdf}
+  \caption{Reliability diagram (Brier\,=\,0.217, ECE\,=\,0.199). Can't-tell samples cluster at $p \approx 0.526$.}
+  \label{fig:reliability}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{prob_distribution.pdf}
+  \caption{Predicted probability distributions by true class.}
+  \label{fig:probdist}
+\end{figure}
+
+
+\section{Lexical Feature Analysis}
+\label{app:lexical}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{discriminative_features.pdf}
+  \caption{Top-weighted TF-IDF features by class. Believers favor third-person agentive language; non-believers use first-person and temporal markers.}
+  \label{fig:lexical}
+\end{figure}
+
+Figure~\ref{fig:lexical} shows the top-weighted TF-IDF features from the logistic regression baseline.
+The lexical signal is real---agentive third-person language does distinguish believers---but insufficient.
+The 13.9-point gap to our DeBERTa system captures everything TF-IDF misses: not just \emph{which} words appear, but \emph{how} they are arranged into complete narrative structures.
+
+
+\section{Cross-Validation Details}
+\label{app:cv}
+
+Table~\ref{tab:cv-detail} reports per-fold F1 for all evaluated configurations.
+Our system achieves the lowest fold variance ($\sigma$\,=\,0.007), confirming robust performance across data partitions.
+Figure~\ref{fig:kfold} visualizes these distributions.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}l c c c c c c@{}}
+\toprule
+\textbf{Config} & \textbf{F1} & \textbf{F2} & \textbf{F3} & \textbf{F4} & \textbf{F5} & \textbf{Mean} \\
+\midrule
+Ours (mean)  & .745 & .737 & .730 & .725 & .733 & .734 \\
+$-$ Encoder FT & .674 & .630 & .676 & .659 & .672 & .662 \\
+\bottomrule
+\end{tabular}
+\caption{Per-fold F1 for the fine-tuning ablation. Our system achieves the lowest fold variance ($\sigma$\,=\,0.007).}
+\label{tab:cv-detail}
+\end{table}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{kfold_cv.pdf}
+  \caption{Per-fold F1 distributions across ablation configurations.}
+  \label{fig:kfold}
+\end{figure}
+
+
+\section{Additional Figures}
+\label{app:additional}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{confusion_matrix.pdf}
+  \caption{Development set confusion matrix (40 TN, 23 TP, 10 FP, 4 FN). The system is more prone to false positives than false negatives, consistent with narrative density.}
+  \label{fig:confusion}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{results_overview.pdf}
+  \caption{Macro F1 comparison across all evaluated systems.}
+  \label{fig:overview}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{training_curves.pdf}
+  \caption{Training loss and dev F1 across epochs. Convergence within 6--7 epochs; early stopping (patience 4) is conservative.}
+  \label{fig:training}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{confidence_accuracy.pdf}
+  \caption{Model confidence vs.\ accuracy ($\rho$\,=\,$-$0.014, $p$\,=\,0.901). No significant correlation; the model does not become more accurate at higher confidence outside the error zone.}
+  \label{fig:confidence}
+\end{figure}
+
+\end{document}

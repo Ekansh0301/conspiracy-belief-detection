@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+
+# Model checkpoints (~1.7 GB each — re-train locally or use Git LFS)
+# To track with LFS: git lfs track "models/*.pt"
+models/*.pt
+
+# Runtime logs
+logs/
+results/*.log
+
+# Figure PDFs (regenerate with: python code/generate_pub_figures.py)
+# paper/latex uses ../../figures/ via \graphicspath, so PDFs needed only locally
+figures/*.pdf
+
+# LaTeX build artifacts
+paper/latex/*.aux
+paper/latex/*.bbl
+paper/latex/*.blg
+paper/latex/*.out
+paper/latex/*.synctex.gz
+paper/latex/*.fls
+paper/latex/*.fdb_latexmk
+paper/latex/*.xdv
+*.aux
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+
+# Task data (request from organizers: https://sites.google.com/view/semeval2026-task10)
+data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+*.swp
+*.swo
+
+# Virtual environments
+.venv/
+venv/
+env/

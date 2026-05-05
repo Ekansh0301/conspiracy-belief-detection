@@ -26,7 +26,7 @@
 
 This repository contains the full system for [PsyCoMark (SemEval-2026 Task 10)](https://sites.google.com/view/semeval2026-task10), Subtask 2: given a Reddit post, classify whether the author **believes** a conspiracy theory (`Yes`) or merely **discusses or reports** it (`No`). Evaluation is by macro F1.
 
-The task is hard because the surface-level vocabulary of believers and non-believers is nearly identical — both groups write about the same topics. What differs is *how* they write.
+The task is hard because the surface-level vocabulary of believers and non-believers is nearly identical. Both groups write about the same topics. What differs is *how* they write.
 
 ---
 
@@ -41,7 +41,7 @@ Our central finding is that conspiracy believers do not just use different words
 | Mann-Whitney *p* | **< 10⁻⁸⁰** | — |
 | Full narrative rate (all 5 types) | **41.3%** | 22.2% |
 
-The five marker categories — **Actor**, **Action**, **Effect**, **Evidence**, **Victim** — together form the complete schema of a conspiracy narrative. Believers consistently populate *all five* slots; non-believers leave gaps.
+The five marker categories (**Actor**, **Action**, **Effect**, **Evidence**, **Victim**) together form the complete schema of a conspiracy narrative. Believers consistently populate *all five* slots; non-believers leave gaps.
 
 We call this pattern **narrative density**, and it has a direct architectural implication: because the belief signal is spread across the entire post rather than concentrated at any single token, **sequence-level mean pooling** captures it better than a `[CLS]` representation.
 
@@ -49,8 +49,8 @@ Two experiments confirm the markers carry genuine signal:
 
 | Test | Finding |
 |:---|:---|
-| **Marker masking** — replace all annotated spans with whitespace | F1 drops from 0.723 → 0.670 (−5.3 pp) |
-| **Marker-count fusion** — append 6 normalised count features to encoder output | F1 rises from 0.670 → 0.679 (+0.9 pp) |
+| **Marker masking**: replace all annotated spans with whitespace | F1 drops from 0.723 → 0.670 (−5.3 pp) |
+| **Marker-count fusion**: append 6 normalised count features to encoder output | F1 rises from 0.670 → 0.679 (+0.9 pp) |
 
 ---
 
@@ -60,7 +60,7 @@ Fine-tuned `microsoft/deberta-v3-large` with a lightweight linear classifier on 
 
 | Component | Configuration |
 |:---|:---|
-| Encoder | `microsoft/deberta-v3-large` — 434 M parameters, 24 layers |
+| Encoder | `microsoft/deberta-v3-large` (434 M parameters, 24 layers) |
 | Pooling | Mean pool over all non-padding token representations |
 | Classifier | Single linear layer (hidden dim → 2) |
 | Label smoothing | 0.10 |
@@ -85,9 +85,9 @@ Fine-tuned `microsoft/deberta-v3-large` with a lightweight linear classifier on 
 | TF-IDF + SVM | 0.656 | 0.668 | 0.651 | 0.701 |
 | DeBERTa-v3-large, CLS token | 0.776 | — | — | — |
 | DeBERTa-v3-large, mean pool (single seed) | 0.780 | — | — | — |
-| **Ours — mean pool, 5-seed ensemble** | **0.829** | **0.829** | **0.829** | **0.844** |
+| **Ours: mean pool, 5-seed ensemble** | **0.829** | **0.829** | **0.829** | **0.844** |
 
-> **Official test F1: 0.750** — submitted through the official evaluation portal. Task leaderboard rankings were not yet published at time of writing.
+> **Official test F1: 0.750**, submitted through the official evaluation portal. Task leaderboard rankings were not yet published at time of writing.
 
 ### Ablation (5-Fold CV)
 
@@ -102,9 +102,9 @@ Encoder fine-tuning is by far the dominant factor. All other components (label s
 
 The 7.9-point drop from dev (0.829) to test (0.750) deserves context. Three factors compound on the tiny 77-sample dev set:
 
-1. **Sampling noise** — the bootstrap 95% CI is [0.712, 0.893]; the dev point estimate is inherently unreliable.
-2. **Selection overfit** — both the threshold τ = 0.595 and the can't-tell remapping strategy were chosen using the same 77 samples.
-3. **Ensemble fit** — probability averaging was implicitly calibrated to dev boundary cases.
+1. **Sampling noise**: the bootstrap 95% CI is [0.712, 0.893]; the dev point estimate is inherently unreliable.
+2. **Selection overfit**: both the threshold τ = 0.595 and the can't-tell remapping strategy were chosen using the same 77 samples.
+3. **Ensemble fit**: probability averaging was implicitly calibrated to dev boundary cases.
 
 The 5-fold CV estimate (0.734 ± 0.007) was not used for selection and proved far more predictive of test performance. **We recommend CV-based model selection as standard practice in low-resource shared tasks.**
 
@@ -130,9 +130,9 @@ The 5-fold CV estimate (0.734 ± 0.007) was not used for selection and proved fa
 │   └── run_analysis.py          # post-hoc analysis pipeline
 │
 ├── figures/                     # PNG previews (PDFs are gitignored)
-│   ├── pub_markers.png          # narrative density — paper Fig. 1
-│   ├── pub_probing.png          # layer-wise probing — paper Fig. 2
-│   ├── error_analysis.png       # error breakdown — paper Fig. 3
+│   ├── pub_markers.png          # narrative density (paper Fig. 1)
+│   ├── pub_probing.png          # layer-wise probing (paper Fig. 2)
+│   ├── error_analysis.png       # error breakdown (paper Fig. 3)
 │   └── ...                      # 23 additional exploratory figures
 │
 ├── results/
@@ -145,7 +145,7 @@ The 5-fold CV estimate (0.734 ± 0.007) was not used for selection and proved fa
 │   │   └── ...                  # FP/FN breakdowns, threshold sweep
 │   └── ...                      # all other experiment JSONs
 │
-├── models/                      # gitignored — ~1.7 GB per .pt file
+├── models/                      # gitignored (~1.7 GB per .pt file)
 │   └── improved_H_seed{42,7,2024,1337,2026}.pt
 │
 ├── paper/latex/
@@ -192,7 +192,7 @@ data/
 ### Training
 
 ```bash
-# Full submitted system — 5-seed ensemble with H_conservative configuration
+# Full submitted system: 5-seed ensemble with H_conservative configuration
 python code/train_improved.py
 
 # Lightweight single-seed run (for development / verification)
@@ -217,7 +217,7 @@ python code/generate_pub_figures.py   # regenerate all paper figures
 ## Citation
 
 ```bibtex
-@inproceedings{goyal2026truthgradient,
+@inproceedings{goyal-2026-truthgradient,
   title     = {Truth Gradient at {SemEval}-2026 Task~10:
                Mean Pooling and Narrative Density for Conspiracy Belief Detection},
   author    = {Goyal, Ekansh},
